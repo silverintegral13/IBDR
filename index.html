@@ -1,0 +1,1446 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shariah Compliance and Arbitral Award Enforcement (Copy)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Public+Sans:wght@400..700&display=swap">
+<style>
+/* Plan: a fixed 1600×900 slide stage scaled to the window; light paper background;
+   navy = national law & courts, amber = Shariah; concept first, every concept slide ends on a takeaway band. */
+:root{
+  --bg:#F3F4F0;
+  --paper:#FCFCFA;
+  --ink:#152131;
+  --muted:#4A5566;
+  --line:#D6DBD3;
+  --soft:#E8EBE5;
+  --law:#1F4E8C;
+  --law-tint:#E2EAF5;
+  --shariah:#995010;
+  --shariah-tint:#F6E9DA;
+  --gold:#E9B67F;
+  --ok:#2B6E46; --ok-tint:#E1F0E6;
+  --no:#A93434; --no-tint:#F7E3E1;
+  --warn:#8A5A00; --warn-tint:#F8EDCF;
+  --serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:'Public Sans', 'Segoe UI', Arial, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+body{overflow:hidden}
+button{font-family:var(--sans);color:inherit}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--law);outline-offset:3px}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+#viewport{position:fixed;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:bottom .25s}
+#stage{width:1600px;height:900px;position:relative;flex:none;transform-origin:center center;background:var(--bg);overflow:hidden}
+
+/* ---------- chrome ---------- */
+.topbar{position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;gap:28px;padding:0 48px;border-bottom:1px solid var(--line);background:var(--bg);z-index:5}
+.brand{font:700 17px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap;display:flex;align-items:center;gap:10px}
+.brand .ic{color:var(--shariah);width:22px;height:22px}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tab{border:0;background:transparent;font:600 18px/1 var(--sans);color:var(--muted);padding:10px 14px;border-radius:999px;cursor:pointer}
+.tab.on{background:var(--ink);color:var(--paper)}
+.tab:hover{background:var(--soft)}
+.tab.on:hover{background:var(--ink)}
+.counter{font:600 18px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--muted);min-width:76px;text-align:right}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:3px;background:linear-gradient(90deg,var(--law) 0 50%,var(--shariah) 50% 100%);opacity:.85}
+
+.footer{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;gap:16px;padding:0 48px;border-top:1px solid var(--line);background:var(--bg);z-index:5}
+.navbtn{border:1px solid var(--line);background:var(--paper);border-radius:8px;width:40px;height:32px;font:600 18px/1 var(--sans);cursor:pointer}
+.navbtn:hover{border-color:var(--ink)}
+.hint{font-size:15px;color:var(--muted)}
+.hint kbd{font:600 13px/1 var(--sans);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:2px 6px;background:var(--paper)}
+.progress{flex:1;height:6px;background:var(--soft);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--law),var(--shariah));transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.tool{border:1px solid var(--line);background:var(--paper);border-radius:8px;height:32px;padding:0 12px;font:600 15px/1 var(--sans);cursor:pointer;font-variant-numeric:tabular-nums}
+.tool:hover{border-color:var(--ink)}
+.tool.warn{color:var(--warn);border-color:var(--warn)}
+.tool.over{color:var(--no);border-color:var(--no)}
+
+/* ---------- slide frame ---------- */
+.slide{position:absolute;left:0;right:0;top:64px;bottom:48px;padding:28px 64px 24px;display:none;flex-direction:column;z-index:0}
+.slide.active{display:flex}
+.notes{display:none}
+.orn2{position:absolute;right:80px;top:24px;width:78px;height:78px;z-index:-1;pointer-events:none}
+.orn{position:absolute;right:0;bottom:0;width:340px;height:300px;z-index:-1;opacity:.6;pointer-events:none}
+.eyebrow{font:700 25px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--shariah);display:flex;gap:10px;align-items:center}
+.eyebrow .ic{width:20px;height:20px}
+.eyebrow .num{color:var(--muted)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance;color:var(--ink)}
+h2{font-size:53px;line-height:1.1;margin-top:10px;max-width:1250px}
+h3{font-size:33px;line-height:1.2}
+p{margin:0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 24px}
+.body{flex:1;min-height:0;margin-top:20px;display:flex;flex-direction:column;gap:16px}
+.mid{flex:1;min-height:0}
+.lbl{font:700 23px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.linkchip{display:inline-flex;gap:10px;align-items:center;font-size:25px;color:var(--ink);background:var(--soft);border-radius:999px;padding:7px 15px;align-self:flex-start}
+.linkchip b{white-space:nowrap;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:21px;color:var(--muted)}
+.linkchip .ic{width:18px;height:18px;color:var(--muted)}
+.spacer{flex:1}
+.btn{font:600 29px/1 var(--sans);padding:12px 20px;border-radius:999px;border:2px solid var(--ink);background:var(--paper);cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn.cta{background:var(--law);border-color:var(--law);color:#fff}
+.btn.small{font-size:25px;padding:9px 15px}
+.clickme{font-size:24px;color:var(--muted);font-style:italic}
+.iconbox{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.iconbox .ic{width:28px;height:28px}
+.ib-sh{background:var(--shariah-tint);color:var(--shariah)}
+.ib-law{background:var(--law-tint);color:var(--law)}
+.ib-ink{background:var(--soft);color:var(--ink)}
+.ib-ok{background:var(--ok-tint);color:var(--ok)}
+
+/* takeaway band */
+.take{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;background:var(--ink);color:var(--paper);border-radius:14px;padding:16px 24px;position:relative;overflow:hidden}
+.take::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--law),var(--shariah))}
+.take .tk{display:flex;align-items:center;gap:10px;font:700 23px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.take .tk .ic{width:26px;height:26px}
+.take p{font:500 32px/1.33 var(--serif)}
+.take .lesson{display:flex;align-items:center;gap:10px;background:#24354B;border-radius:10px;padding:9px 14px;font-size:23px;line-height:1.25;color:#C9D2DC;white-space:nowrap}
+.take .lesson b{display:block;color:#fff;font-size:25px}
+.take .lesson .ic{color:var(--gold)}
+
+/* motion */
+.slide.active .rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 100ms + 80ms)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.slide.active .orn2{animation:ornIn 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ornIn{from{opacity:0;transform:rotate(-45deg) scale(.6)}to{opacity:1;transform:none}}
+.step{opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .45s,transform .45s,visibility 0s linear .45s}
+.step.shown{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .45s,visibility 0s}
+.flow{stroke-dasharray:10 9;animation:dash 1.1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-38}}
+.spin{animation:spin 60s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- S1 title ---------- */
+.title-wrap{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center;flex:1}
+.title-wrap h1{font-size:72px;line-height:1.02;letter-spacing:-.01em;margin-top:18px}
+.title-wrap .sub{font:400 34px/1.3 var(--serif);color:var(--muted);margin-top:16px}
+.qcard{margin-top:22px;border-left:6px solid var(--shariah);background:var(--paper);padding:20px 26px;border-radius:0 14px 14px 0;max-width:820px}
+.qcard .lbl{color:var(--shariah)}
+.qcard p{font:500 37px/1.3 var(--serif);margin-top:8px}
+.titlemeta{margin-top:20px;font-size:24px;color:var(--muted);display:flex;gap:22px;flex-wrap:wrap}
+.titlemeta b{color:var(--ink)}
+.titlemeta .grp{flex-basis:100%;line-height:1.4}
+.titlemeta .names{font-size:24px;color:var(--ink)}
+.starbox{position:relative;width:400px;height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.starbox svg.pattern{position:absolute;inset:0;opacity:.6}
+.sq-law{stroke-dasharray:820;animation:draw 1.4s ease-out both .2s}
+.sq-sh{transform-box:view-box;transform-origin:210px 210px;transform:rotate(45deg);animation:spinIn 1.6s cubic-bezier(.2,.7,.2,1) both .9s}
+@keyframes draw{from{stroke-dashoffset:820}to{stroke-dashoffset:0}}
+@keyframes spinIn{from{transform:rotate(0deg);opacity:0}to{transform:rotate(45deg);opacity:1}}
+.core{animation:rise .8s both 1.9s}
+.legend{display:flex;gap:18px;margin-top:4px;font-size:28px;position:relative}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{width:16px;height:16px;border-radius:3px;display:inline-block}
+.starcap{text-align:center;font:italic 400 22px/1.3 var(--serif);color:var(--muted);margin-top:8px;position:relative}
+.agenda{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:6px;border:1px solid var(--line);border-radius:14px;background:var(--paper);overflow:hidden}
+.ag{display:flex;align-items:center;gap:12px;padding:14px 18px;border-left:1px solid var(--line);font-size:26px;line-height:1.25;cursor:pointer;background:transparent;border-top:0;border-right:0;border-bottom:0;text-align:left}
+.ag:first-child{border-left:0}
+.ag:hover{background:var(--soft)}
+.ag .n{font:700 36px/1 var(--serif);color:var(--shariah)}
+.ag small{display:block;color:var(--muted);font-size:23px}
+
+/* ---------- shared two-column layout ---------- */
+.cols{display:grid;grid-template-columns:1fr 740px;gap:40px;flex:1;min-height:0;margin-top:26px;align-items:stretch}
+.left{display:flex;flex-direction:column;gap:22px;min-height:0;justify-content:space-between}
+/* lesson panel: one-line case + generalisable principles */
+.lp{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:12px;align-self:stretch}
+.lp .case1{font-size:23px;line-height:1.4;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--line)}
+.lp .case1 .tag{display:inline-block;font:700 17px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:5px 8px;border-radius:5px;margin-right:8px;vertical-align:2px}
+.lp .case1 b{color:var(--ink)}
+.lp .case1 i{color:var(--law);font-style:normal;font-weight:600}
+.lp .teach{display:flex;align-items:center;gap:8px;font:700 19px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--shariah)}
+.lp .teach .ic{width:22px;height:22px}
+.lp ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;counter-reset:p}
+.lp li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;counter-increment:p}
+.lp li::before{content:counter(p);width:30px;height:30px;border-radius:50%;background:var(--shariah-tint);color:var(--shariah);font:700 24px/30px var(--sans);text-align:center;margin-top:1px}
+.lp li p{font-size:24px;line-height:1.36;color:var(--muted)}
+.lp li p b{display:block;color:var(--ink);font-weight:700;font-size:26px;margin-bottom:3px}
+.lp .foot{font-size:24px;color:var(--muted);display:flex;align-items:center;gap:8px;padding-top:4px}
+.lp .foot .ic{width:18px;height:18px}
+.lp .foot b{white-space:nowrap;font-size:21px;letter-spacing:.1em;text-transform:uppercase}
+
+.who3{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.w{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.w .iconbox{width:44px;height:44px;border-radius:10px}
+.w .iconbox .ic{width:24px;height:24px}
+.w b{display:block;font:700 26px/1.25 var(--sans)}
+.w p{font-size:24px;line-height:1.35;color:var(--muted);margin-top:2px}
+.s3cols .left{gap:14px}
+.gates{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.gate{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;border-radius:12px;padding:12px 18px;font-size:26px;line-height:1.4}
+.gate .iconbox{width:48px;height:48px;background:var(--paper)}
+.gate b{display:block;font-size:22px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+.gate.g1{background:var(--shariah-tint)} .gate.g1 b,.gate.g1 .iconbox{color:var(--shariah)}
+.gate.g2{background:var(--law-tint)} .gate.g2 b,.gate.g2 .iconbox{color:var(--law)}
+.travel{margin-top:auto;display:flex;gap:14px;align-items:center;padding:14px 20px;background:var(--law-tint);border-radius:12px;font-size:28px;line-height:1.45;color:var(--ink)}
+.travel .ic{color:var(--law);width:28px;height:28px}
+.net{font:500 30px/1.4 var(--serif);margin-top:14px;padding:12px 16px;background:var(--ok-tint);border-radius:10px}
+.htl{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.hrow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.hrow::before{content:"";position:absolute;left:8px;right:8px;top:8px;height:3px;background:linear-gradient(90deg,var(--shariah),var(--law));opacity:.45;border-radius:3px}
+.hp{position:relative;padding-top:26px}
+.hp::before{content:"";position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--shariah)}
+.hp .d{font:700 22px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--shariah)}
+.hp p{font-size:25px;line-height:1.38;margin-top:4px}
+.answer2{display:flex;flex-direction:column;gap:10px;padding:22px 26px;border-top:5px solid var(--shariah);flex:1;min-height:0}
+.answer2 .q{font:500 32px/1.3 var(--serif);color:var(--ink);margin-bottom:4px}
+.answer2 .a{font-size:26px;line-height:1.45;color:var(--muted)}
+.verdict{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;align-items:center;border-radius:10px;padding:9px 14px;margin-top:4px}
+.verdict .vk{font:700 18px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.verdict .vv{white-space:nowrap;font:700 30px/1 var(--serif)}
+.verdict.ok{background:var(--ok-tint);color:var(--ok)}
+.verdict.warn{background:var(--warn-tint);color:var(--warn)}
+.oneliner{font:italic 500 28px/1.4 var(--serif);color:var(--ink);border-top:1px solid var(--line);padding-top:12px}
+.answer2 .a b{color:var(--ink)}
+
+.facts{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:24px}
+.fact{grid-column:span 2;padding:20px 24px;display:flex;flex-direction:column;gap:10px}
+.fact.wide{grid-column:span 3}
+.fact .lbl{display:flex;align-items:center;gap:8px;color:var(--shariah);font-size:24px}
+.fact .lbl .ic{width:20px;height:20px}
+.fact p{font-size:30px;line-height:1.4;color:var(--muted)}
+.fact p b{color:var(--ink)}
+.fact .figure{font:700 55px/1 var(--serif);color:var(--ink)}
+.hrow.five{grid-template-columns:repeat(5,1fr)}
+.htl.case{margin-top:auto;gap:14px}
+.htl.case .hp{padding-top:30px}
+.htl.case .hp::before{width:16px;height:16px}
+.htl.case .hrow::before{top:10px}
+.htl.case .hp .d{font-size:24px}
+.htl.case .hp p{font-size:28px;line-height:1.35}
+.issues.vert{display:flex;flex-direction:column;gap:30px;margin-top:0;justify-content:space-between}
+.issues.vert .issue{padding-top:12px;gap:6px}
+.issues.vert .lbl{display:flex;justify-content:space-between;gap:12px}
+.issues.vert .lbl span{color:var(--muted);letter-spacing:.06em}
+.issues.vert h3{font-size:32px}
+
+/* ---------- S2 ---------- */
+.anat{position:relative;width:660px;height:430px;margin:0}
+.anat svg{position:absolute;inset:0}
+.node{position:absolute;width:210px;height:92px;border:2px solid var(--ink);background:var(--paper);border-radius:12px;font:600 24px/1.15 var(--sans);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s,background .2s}
+.node small{font:400 17px/1.2 var(--sans);color:var(--muted);margin-top:4px}
+.node:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(21,33,49,.12)}
+.node.sel{background:var(--ink);color:var(--paper)}
+.node.sel small{color:#C9D2DC}
+.node.n-sh{border-color:var(--shariah)}
+.node.n-law{border-color:var(--law)}
+.hub{position:absolute;left:240px;top:169px;width:180px;height:92px;border-radius:999px;background:var(--shariah-tint);border:2px dashed var(--shariah);display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 30px/1 var(--serif)}
+.hub small{font:500 22px/1.2 var(--sans);color:var(--shariah);margin-top:4px}
+.detail{max-width:660px !important;margin:0 !important;font-size:26px;line-height:1.5;color:var(--muted);border-left:4px solid var(--ink);padding:4px 0 4px 18px;max-width:740px;margin:0 auto}
+.detail b{color:var(--ink)}
+.numbers{display:flex;flex-direction:column}
+.numrow{display:grid;grid-template-columns:240px 1fr;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.numrow:first-child{padding-top:0}
+.numrow .big{font:700 53px/1 var(--serif);font-variant-numeric:tabular-nums}
+.numrow .big small{font-size:32px;color:var(--muted);font-weight:600}
+.numrow p{font-size:26px;line-height:1.4;color:var(--muted)}
+.src{font-size:22px;color:var(--muted);padding-top:8px}
+
+/* ---------- S3 ---------- */
+.proline{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:22px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pro{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
+.pro .iconbox{width:44px;height:44px;border-radius:10px}
+.pro .iconbox .ic{width:24px;height:24px}
+.pro .t{font:700 30px/1.1 var(--serif);color:var(--shariah)}
+.pro .d{font-size:25px;line-height:1.35;color:var(--muted);margin-top:2px}
+.s3cols{margin-top:22px}
+.modebar{display:flex;gap:10px;align-items:center}
+.modebar .lbl{margin-right:4px}
+.diagram svg{display:block;margin:0 auto}
+.diagram .mode{transition:opacity .45s}
+.diagram .mode.off{opacity:0}
+.mcap{font:600 30px/1.35 var(--serif);text-align:center}
+.mcap b{color:var(--shariah)}
+
+/* ---------- S4 ---------- */
+.clause{font:400 28px/1.38 var(--serif);padding:18px 26px 18px 60px;position:relative}
+.clause .q{position:absolute;left:18px;top:8px;font:700 80px/1 var(--serif);color:var(--shariah);opacity:.35}
+.clause .lbl{margin-bottom:10px}
+.phrase-sh,.phrase-law{transition:color .5s,background .5s;border-radius:6px;padding:0 3px}
+.phrase-sh{color:var(--shariah);background:var(--shariah-tint)}
+.read .phrase-sh{color:#8B93A0;background:transparent;text-decoration:line-through;text-decoration-color:var(--no);text-decoration-thickness:3px}
+.read .phrase-law{background:var(--law-tint);color:var(--law)}
+.btnrow{display:flex;gap:14px;align-items:center}
+.tests{display:flex;flex-direction:column}
+.test{display:grid;grid-template-columns:100px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+.test:last-child{border-bottom:1px solid var(--line)}
+.test .qn{font:700 22px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--law)}
+.test .qq{font:600 25px/1.25 var(--sans)}
+.ans{font:700 25px/1.2 var(--sans);border-radius:999px;padding:9px 14px;white-space:nowrap}
+.ans.no{background:var(--no-tint);color:var(--no)}
+.ans.law{background:var(--law-tint);color:var(--law)}
+
+/* ---------- S5 ---------- */
+.door{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1}
+
+/* ---------- S6 ladder ---------- */
+.ladder{display:flex;flex-direction:column;gap:10px}
+.ladder > .lbl{margin-bottom:4px}
+.rung{display:grid;grid-template-columns:1fr 160px;gap:18px;align-items:center;text-align:left;background:transparent;border:2px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer;transition:border-color .25s,background .25s}
+.rung:hover{border-color:var(--muted)}
+.rung.sel{border-color:var(--ink);background:var(--paper)}
+.rung .nm{font:600 29px/1.3 var(--sans)}
+.rung .nm small{display:block;font:400 23px/1.3 var(--sans);color:var(--muted)}
+.lvl{height:12px;border-radius:999px;background:var(--soft);overflow:hidden}
+.lvl i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--law),var(--shariah));transform-origin:left;animation:grow 1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ladetail{font-size:26px;line-height:1.4;color:var(--muted);border-left:4px solid var(--law);padding:4px 0 4px 18px;min-height:64px}
+.ladetail b{color:var(--ink)}
+
+/* ---------- S7 simulator ---------- */
+.pflow{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;align-items:stretch;margin-top:20px}
+.ps{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.ps .iconbox{width:44px;height:44px;border-radius:10px}
+.ps .iconbox .ic{width:24px;height:24px}
+.ps b{display:block;font:700 28px/1.25 var(--sans)}
+.ps p{font-size:25px;line-height:1.35;color:var(--muted);margin-top:2px}
+.ps.hot{border:2px solid var(--ink);box-shadow:0 6px 18px rgba(21,33,49,.10)}
+.par{display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.par .ic{width:24px;height:24px}
+.htl.proc{border-top:0;padding-top:0;margin-top:26px}
+.hrow.four{grid-template-columns:repeat(4,1fr)}
+.htl.proc .hp p{font-size:25px;line-height:1.3;font-weight:600}
+.htl.proc .hp .d{font-size:17px}
+.htl.proc .hp.hot p{color:var(--law)}
+.htl.proc .hp.hot::before{border-color:var(--law);background:var(--law)}
+.sim2{display:grid;grid-template-columns:360px 1fr;gap:40px;margin-top:22px;flex:1;min-height:0}
+.forums{display:flex;flex-direction:column;gap:12px}
+.forums .fbtn{flex:1}
+.forums .lbl{margin-bottom:4px}
+.fbtn{font:600 25px/1 var(--sans);text-align:left;padding:18px 22px;border-radius:14px;border:2px solid var(--line);background:var(--paper);cursor:pointer;transition:all .2s}
+.fbtn:hover{border-color:var(--muted)}
+.fbtn.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.outcome{padding:18px 24px;display:flex;flex-direction:column;gap:4px}
+.caseline{margin-top:10px;padding-top:12px;border-top:1px solid var(--line);font-size:21px;line-height:1.4;color:var(--muted)}
+.caseline .tag{display:inline-block;font:700 15px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:5px 8px;border-radius:5px;margin-right:8px;vertical-align:2px}
+.caseline b{color:var(--ink)}
+.bar b{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,#E9B67F 0 6px,#F8EDCF 6px 12px);transition:left .6s,width .6s}
+.pill.info{background:var(--law-tint);color:var(--law)}
+.simtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.simtop .lbl{margin-right:6px}
+.sim{display:grid;grid-template-columns:460px 1fr;gap:32px;margin-top:16px}
+.items{display:flex;flex-direction:column;gap:12px}
+.item{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:12px 16px;cursor:pointer;font-size:28px;line-height:1.3}
+.item .box{width:30px;height:30px;border-radius:7px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font:700 28px/1 var(--sans)}
+.item.on{border-color:var(--ink)}
+.item.on .box{background:var(--ink);color:var(--paper)}
+.item .amt{font:700 30px/1 var(--sans);font-variant-numeric:tabular-nums}
+.item small{display:block;font-size:23px;color:var(--muted)}
+.results{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.res{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line);transition:opacity .3s}
+.res:first-child{padding-top:4px}
+.res.dim{opacity:.35}
+.res .what{font:700 26px/1.3 var(--sans)}
+.res .why{font-size:25px;line-height:1.4;color:var(--muted);margin-top:2px}
+.pill{font:700 23px/1 var(--sans);padding:8px 10px;border-radius:999px;text-align:center}
+.pill.ok{background:var(--ok-tint);color:var(--ok)}
+.pill.no{background:var(--no-tint);color:var(--no)}
+.pill.warn{background:var(--warn-tint);color:var(--warn)}
+.pill.na{background:var(--soft);color:var(--muted)}
+.res.flash{animation:flash .5s ease}
+@keyframes flash{from{transform:translateX(-8px);opacity:.4}to{transform:none;opacity:1}}
+.total{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:14px}
+.total .n{font:700 37px/1 var(--serif);font-variant-numeric:tabular-nums}
+.total .n small{font:500 26px var(--sans);color:var(--muted)}
+.bar{height:16px;background:var(--soft);border-radius:999px;overflow:hidden;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ok);border-radius:999px;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.lstrip{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-top:18px;border-top:1px solid var(--line)}
+.lstrip.one{grid-template-columns:1fr}
+.lstrip p{font-size:28px;line-height:1.5;color:var(--muted)}
+.lstrip p b{color:var(--ink)}
+.lstrip .tag{display:inline-block;font:700 21px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:5px 8px;border-radius:5px;margin-right:8px;vertical-align:2px}
+.lstrip .tag.t{background:var(--shariah)}
+
+/* ---------- S8 ---------- */
+.oneline{font-size:30px;line-height:1.5;color:var(--muted);margin-top:22px;max-width:1300px}
+.oneline b{color:var(--ink)}
+.chain{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px;font:600 28px/1.3 var(--sans)}
+.chain span.k{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.chain span.k .ic{width:20px;height:20px;color:var(--shariah)}
+.chain span.k.def{border-color:var(--no);color:var(--no)}
+.chain span.k.def .ic{color:var(--no)}
+.chain .ar .ic{width:22px;height:22px;color:var(--muted)}
+.question{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--ink);color:var(--paper);border-radius:14px;padding:20px 28px;margin-top:26px}
+.question .lbl{color:var(--gold)}
+.question p{font:500 37px/1.3 var(--serif)}
+.question .iconbox{background:#24354B;color:var(--gold)}
+.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:30px}
+.issue{display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--law);padding-top:14px}
+.issue .lbl{color:var(--law)}
+.issue h3{font-size:33px}
+.issue .ip{font-size:26px;line-height:1.45;color:var(--muted)}
+.issue .linkchip{margin-top:6px}
+
+/* ---------- S9 ---------- */
+.judge{display:grid;grid-template-columns:480px 1fr;gap:48px;flex:1;min-height:0;margin-top:26px}
+.vote{display:flex;flex-direction:column;gap:12px;justify-content:space-between}
+.vote .ask{font:500 32px/1.35 var(--serif)}
+.vbtn{display:flex;justify-content:space-between;align-items:center;width:100%;border:2px solid var(--ink);background:var(--paper);border-radius:14px;padding:13px 20px;font:700 30px/1 var(--sans);cursor:pointer;transition:transform .15s}
+.vbtn:active{transform:scale(.98)}
+.vbtn .ct{font:700 34px/1 var(--serif);font-variant-numeric:tabular-nums;min-width:60px;text-align:right}
+.vbtn.enf{border-color:var(--ok)} .vbtn.enf .ct{color:var(--ok)}
+.vbtn.ref{border-color:var(--no)} .vbtn.ref .ct{color:var(--no)}
+.scales{display:flex;justify-content:center}
+.beam,.panL,.panR{transition:transform .7s cubic-bezier(.3,1.4,.5,1)}
+.vrow{display:flex;gap:12px;align-items:center}
+.holding{display:flex;flex-direction:column;gap:0}
+.stamp{align-self:flex-start;font:800 41px/1 var(--sans);letter-spacing:.16em;color:var(--ok);border:5px solid var(--ok);border-radius:10px;padding:8px 18px;transform:rotate(-4deg);margin-bottom:12px}
+.step.shown .stamp{animation:stamp .55s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes stamp{from{transform:rotate(-4deg) scale(1.6);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
+.answer{display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
+.answer .tag{font:700 21px/1.25 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--law);border-radius:8px;padding:8px 6px;text-align:center}
+.answer h3{font:700 30px/1.3 var(--sans)}
+.answer p{font-size:26px;line-height:1.45;color:var(--muted);margin-top:3px}
+.answer p i{color:var(--shariah);font-style:normal;font-weight:600}
+.holding .linkchip{margin-top:14px}
+
+/* ---------- S10 ---------- */
+.mirror{flex:1;display:grid;grid-template-columns:1fr 84px 1fr;align-items:stretch}
+.mcard{padding:20px 22px;border-top:6px solid var(--law);display:flex;flex-direction:column;gap:10px}
+.mcard.j{border-top-color:var(--shariah)}
+.mcard .where{display:flex;align-items:center;gap:10px}
+.mcard h3{font-size:33px}
+.mrow{display:grid;grid-template-columns:1fr;gap:2px;font-size:26px;line-height:1.38;border-top:1px solid var(--line);padding-top:9px}
+.mrow.lesson{margin-top:auto}
+.mrow.lesson span:last-child{color:var(--ink);font-weight:600}
+.mrow span:first-child{font:700 21px/1.7 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pivot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted)}
+.pivot .circ{width:84px;height:84px;border-radius:50%;background:var(--paper);border:2px dashed var(--ink);display:flex;align-items:center;justify-content:center;text-align:center;font:700 21px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.pivot .ic{width:30px;height:30px}
+.mnote{font-size:26px;line-height:1.5;color:var(--muted)}
+.mnote b{color:var(--ink)}
+
+/* ---------- S11 ---------- */
+.learn{display:grid;grid-template-columns:1fr 460px;gap:40px;flex:1;min-height:0;margin-top:22px;max-height:640px}
+.checklist{display:flex;flex-direction:column;gap:0}
+.li{display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:start;text-align:left;width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:13px 6px;cursor:pointer;transition:background .25s;flex:1}
+.li:first-child{border-top:1px solid var(--line)}
+.li:hover{background:var(--paper)}
+.li .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.li .tick{width:40px;height:40px;border-radius:50%;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font:700 28px/1 var(--sans);color:var(--ink);transition:all .3s}
+.li.done{background:#F4FAF6}
+.li.done .tick{background:var(--ok);border-color:var(--ok);color:#fff}
+.li h3{font:700 30px/1.25 var(--sans)}
+.li p{font-size:26px;line-height:1.45;color:var(--muted);margin-top:4px}
+.li .cite{font-size:23px;color:var(--shariah);font-weight:600;white-space:nowrap}
+.ready{display:flex;flex-direction:column;gap:16px}
+.gauge{padding:18px 20px;display:flex;flex-direction:column;align-items:center}
+.gauge .lbl{align-self:flex-start}
+.needle{transform-box:view-box;transform-origin:150px 150px;transition:transform .8s cubic-bezier(.3,1.3,.5,1)}
+.garc{transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1)}
+.gauge .n{font:700 51px/1 var(--serif);margin-top:-6px;font-variant-numeric:tabular-nums}
+.gauge .n small{font-size:30px;color:var(--muted)}
+.thanks{background:var(--ink);color:var(--paper);border-radius:14px;padding:22px 26px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.thanks h3{color:var(--paper);font-size:44px}
+.thanks p{font-size:28px;line-height:1.5;color:#C9D2DC;margin-top:10px}
+
+/* ---------- S12 thank you ---------- */
+.endgrid{display:grid;grid-template-columns:600px 1fr;gap:44px;flex:1;min-height:0}
+.bigthanks{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:20px;padding:44px 48px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.bigthanks::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(var(--law),var(--shariah))}
+.bigthanks .lbl{color:var(--gold)}
+.bigthanks h2{color:var(--paper);font-size:104px;line-height:1;margin:0;white-space:nowrap}
+.bigthanks .sub{font:400 39px/1.2 var(--serif);color:#C9D2DC}
+.bigthanks .endans{font-size:30px;line-height:1.5;color:#C9D2DC;border-top:1px solid #2E4058;padding-top:18px;margin-top:10px;max-width:520px}
+.bigthanks .who{font-size:26px;color:#AEB9C6}
+.bigthanks .who b{color:#fff}
+.endstar{position:absolute;right:-60px;bottom:-60px;width:320px;height:320px;opacity:.35;animation:spin 90s linear infinite}
+.endright{display:flex;flex-direction:column;gap:18px;min-height:0}
+.endcases{padding:20px 24px}
+.endcases ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.endcases li{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-top:1px solid var(--line);font-size:26px;line-height:1.3}
+.endcases li span{color:var(--muted);font-size:23px;white-space:nowrap}
+.faq{border-left:4px solid var(--law);padding:4px 0 4px 18px}
+.faq h3{font:700 30px/1.3 var(--sans)}
+.faq p{font-size:26px;line-height:1.45;color:var(--muted);margin-top:4px}
+.endright .srcs{padding:18px 24px;margin-top:auto}
+.endright .srcs ol{columns:2;column-gap:28px;font-size:21px;line-height:1.55;margin:6px 0 0;padding-left:20px}
+
+/* ---------- S12 backup (old) ---------- */
+.backup{display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;margin-top:22px}
+.qa{display:flex;flex-direction:column;gap:12px}
+.qa .card h3{font-size:31px}
+.qa .card p{font-size:26px;line-height:1.42;margin-top:6px}
+.srcs{font-size:25px;line-height:1.5}
+.srcs ol{margin:8px 0 0;padding-left:24px}
+.srcs a{color:var(--law)}
+
+/* ---------- overlays ---------- */
+#notes{position:fixed;left:0;right:0;bottom:0;height:0;overflow:hidden;background:var(--ink);color:#E9EDF2;transition:height .25s;z-index:20}
+#notes.open{height:31vh}
+#notes .in{padding:16px 32px;display:grid;grid-template-columns:220px 1fr;gap:28px;height:100%;overflow:auto}
+#notes .meta{font-size:15px;line-height:1.6;color:#AEB9C6}
+#notes .meta b{display:block;color:#fff;font-size:30px;font-family:var(--serif);margin-bottom:4px}
+#notes .txt{font-size:18px;line-height:1.6;max-width:90ch}
+#overview{position:fixed;inset:0;background:rgba(243,244,240,.97);z-index:30;display:none;padding:40px 56px;overflow:auto}
+#overview.open{display:block}
+#overview h2{font-size:39px;margin:0 0 20px}
+.ogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ocard{text-align:left;background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer}
+.ocard:hover,.ocard.cur{border-color:var(--ink)}
+.ocard .n{font:700 22px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--shariah)}
+.ocard .t{font:600 28px/1.3 var(--serif);margin-top:6px}
+.ocard .tm{font-size:22px;color:var(--muted);margin-top:6px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* ===== Theme layer. Iznik tiles: cobalt = national law, turquoise = Shariah, coral = highlight.
+   Muted off-white by default; palettes switch with the footer button (data-palette). ===== */
+:root{ --bg:#F4F4F1;--paper:#FCFCFA;--ink:#0E1B3D;--muted:#4C5A78;--line:#DCDDD7;--soft:#EBEBE6;
+  --law:#2147B8;--law-tint:#E1E8FA;--shariah:#0B8584;--shariah-tint:#D8F0EE;--gold:#FF9F86;--accent:#D9473A;
+  --ok:#2F7D3B;--ok-tint:#E0F1E2;--no:#B83A3A;--no-tint:#F8E2E0;--warn:#9A6300;--warn-tint:#FBEFD2;
+  --hero:#0E1B3D;--hero2:#1C3170;--on-hero:#F4F7FC;--on-hero-muted:#B7C3DE;--on-accent:#FFFFFF;
+  --pat:#2147B8;--glow1:rgba(33,71,184,.035);--glow2:rgba(11,133,132,.04);--shadow:rgba(14,27,61,.28);color-scheme:light }
+:root[data-palette="midnight"]{ --bg:#0B1222;--paper:#131C31;--ink:#EAF0FA;--muted:#A2AEC6;--line:#26324D;--soft:#1B2640;
+  --law:#86A8FF;--law-tint:#1B2A4F;--shariah:#4FD1C5;--shariah-tint:#123A3C;--gold:#FFB4A0;--accent:#FF8A75;
+  --ok:#6BD68F;--ok-tint:#15362A;--no:#FF8C86;--no-tint:#3E1F25;--warn:#F2C35E;--warn-tint:#3A2F17;
+  --hero:#17223D;--hero2:#24365F;--on-hero:#F2F5FB;--on-hero-muted:#B3BFD8;--on-accent:#0B1222;
+  --pat:#86A8FF;--glow1:rgba(134,168,255,.10);--glow2:rgba(79,209,197,.08);--shadow:rgba(0,0,0,.5);color-scheme:dark }
+:root[data-palette="saffron"]{ --bg:#F2F3EF;--paper:#FCFCFA;--ink:#152131;--muted:#4A5566;--line:#D6DBD3;--soft:#E8EBE5;
+  --law:#1F4E8C;--law-tint:#E2EAF5;--shariah:#A3550F;--shariah-tint:#F6E9DA;--gold:#E9B67F;--accent:#A3550F;
+  --hero:#152131;--hero2:#2A3D57;--on-hero:#FCFCFA;--on-hero-muted:#C9D2DC;
+  --pat:#995010;--glow1:rgba(31,78,140,.035);--glow2:rgba(163,85,15,.04);color-scheme:light }
+:root[data-palette="plum"]{ --bg:#F4F3F2;--paper:#FCFCFB;--ink:#231A3D;--muted:#5E5677;--line:#DDD5E8;--soft:#ECE5F3;
+  --law:#4B37A3;--law-tint:#E9E4F8;--shariah:#A86A0C;--shariah-tint:#F7ECD6;--gold:#F2C46B;--accent:#B0306A;
+  --hero:#231A3D;--hero2:#3E2F6E;--on-hero:#FBF8FF;--on-hero-muted:#C8BEDF;
+  --pat:#4B37A3;--glow1:rgba(75,55,163,.035);--glow2:rgba(168,106,12,.04);color-scheme:light }
+[fill="#1F4E8C"]{fill:var(--law)} [stroke="#1F4E8C"]{stroke:var(--law)}
+[fill="#995010"]{fill:var(--shariah)} [stroke="#995010"]{stroke:var(--shariah)}
+[fill="#152131"]{fill:var(--ink)} [stroke="#152131"]{stroke:var(--ink)}
+[fill="#FCFCFA"]{fill:var(--paper)} [stroke="#FCFCFA"]{stroke:var(--paper)}
+[fill="#4A5566"]{fill:var(--muted)} [stroke="#4A5566"]{stroke:var(--muted)}
+[fill="#F6E9DA"]{fill:var(--shariah-tint)} [stroke="#F6E9DA"]{stroke:var(--shariah-tint)}
+[fill="#E2EAF5"]{fill:var(--law-tint)} [stroke="#E2EAF5"]{stroke:var(--law-tint)}
+[fill="#E1F0E6"]{fill:var(--ok-tint)} [stroke="#E1F0E6"]{stroke:var(--ok-tint)}
+[fill="#2B6E46"]{fill:var(--ok)} [stroke="#2B6E46"]{stroke:var(--ok)}
+[fill="#F8EDCF"]{fill:var(--warn-tint)} [stroke="#F8EDCF"]{stroke:var(--warn-tint)}
+[fill="#8A5A00"]{fill:var(--warn)} [stroke="#8A5A00"]{stroke:var(--warn)}
+[fill="#A93434"]{fill:var(--no)} [stroke="#A93434"]{stroke:var(--no)}
+[fill="#F7E3E1"]{fill:var(--no-tint)} [stroke="#F7E3E1"]{stroke:var(--no-tint)}
+[fill="#D6DBD3"]{fill:var(--line)} [stroke="#D6DBD3"]{stroke:var(--line)}
+[fill="#CFD5CB"]{fill:var(--line)} [stroke="#CFD5CB"]{stroke:var(--line)}
+[fill="#C9CFC6"]{fill:var(--line)} [stroke="#C9CFC6"]{stroke:var(--line)}
+stop[stop-color="#F3F4F0"]{stop-color:var(--bg)}
+
+html,body{background:var(--bg)}
+#stage{background:radial-gradient(900px 560px at 100% 0%,var(--glow2),transparent 70%),radial-gradient(900px 560px at 0% 100%,var(--glow1),transparent 70%),var(--bg);transition:background .4s}
+#stage::before{content:"";position:absolute;inset:0;background:var(--pat);opacity:.03;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='black' stroke-width='1.4'%3E%3Crect x='30' y='30' width='36' height='36'/%3E%3Crect x='30' y='30' width='36' height='36' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h6M90 48h6M48 0v6M48 90v6'/%3E%3C/g%3E%3C/svg%3E") 0 0/96px 96px repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='black' stroke-width='1.4'%3E%3Crect x='30' y='30' width='36' height='36'/%3E%3Crect x='30' y='30' width='36' height='36' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h6M90 48h6M48 0v6M48 90v6'/%3E%3C/g%3E%3C/svg%3E") 0 0/96px 96px repeat;pointer-events:none;z-index:0}
+.topbar,.footer{background:transparent}
+.topbar::after{background:linear-gradient(90deg,var(--law),var(--shariah) 65%,var(--accent));opacity:1}
+.brand .ic{color:var(--accent)}
+.tab.on,.tab.on:hover{background:var(--hero);color:var(--on-hero)}
+.tool{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
+.tool .ic{width:18px;height:18px;color:var(--shariah)}
+.navbtn{color:var(--ink)}
+
+h2.ttl{display:flex;align-items:center;gap:20px}
+.tile{width:66px;height:66px;border-radius:18px;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--law),var(--shariah));color:var(--on-accent);box-shadow:0 12px 26px -12px var(--law)}
+.tile .ic{width:36px;height:36px;stroke-width:1.7}
+
+.card{border-radius:18px;box-shadow:0 18px 40px -30px var(--shadow)}
+.lp{border-radius:20px;background:var(--paper);box-shadow:0 22px 48px -34px var(--shadow)}
+.lp li{grid-template-columns:42px 1fr}
+.lp li::before{display:none}
+.lic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--shariah-tint);color:var(--shariah)}
+.lp li:nth-child(even) .lic{background:var(--law-tint);color:var(--law)}
+.lic .ic{width:24px;height:24px}
+.lp .case1 .tag,.caseline .tag,.lstrip .tag{background:var(--accent);color:var(--on-accent)}
+.numrow .big,.fact .figure{background:linear-gradient(90deg,var(--law),var(--shariah));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.agenda{border-radius:18px;box-shadow:0 18px 40px -30px var(--shadow)}
+.ag{padding:14px 12px;gap:12px;font-size:24px}
+.ag small{font-size:21px}
+.agi{position:relative;width:48px;height:48px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--shariah-tint);color:var(--shariah)}
+.ag:nth-child(even) .agi{background:var(--law-tint);color:var(--law)}
+.agi .ic{width:26px;height:26px}
+.agi em{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--on-accent);font:700 13px/22px var(--sans);font-style:normal;text-align:center}
+
+.node.sel{background:linear-gradient(135deg,var(--law),var(--shariah));color:var(--on-accent);border-color:transparent}
+.node.sel small{color:var(--on-accent);opacity:.8}
+.btn{color:var(--ink)}
+.btn.on{background:linear-gradient(135deg,var(--law),var(--shariah));color:var(--on-accent);border-color:transparent}
+.btn.cta{background:linear-gradient(135deg,var(--law),var(--shariah));border-color:transparent;color:var(--on-accent)}
+.fbtn{display:flex;align-items:center;gap:12px;color:var(--ink)}
+.fbtn .ic{color:var(--shariah)}
+.fbtn.on{background:linear-gradient(135deg,var(--law),var(--shariah));border-color:transparent;color:var(--on-accent)}
+.fbtn.on .ic{color:var(--on-accent)}
+.read .phrase-sh{color:var(--muted)}
+.bar b{background:repeating-linear-gradient(45deg,var(--gold) 0 6px,var(--warn-tint) 6px 12px)}
+.answer .tag{background:linear-gradient(135deg,var(--law),var(--shariah));color:var(--on-accent)}
+.issues.vert .lbl .lbl-l{display:inline-flex;align-items:center;gap:10px;color:var(--law);letter-spacing:.12em}
+.issues.vert .lbl .lbl-l .ic{width:24px;height:24px;color:var(--shariah)}
+.issue{border-top-color:transparent;border-image:linear-gradient(90deg,var(--law),var(--shariah)) 1}
+.li .tick{border-color:var(--law);color:var(--law)}
+.li.done{background:var(--ok-tint)}
+.li.done .tick{color:var(--on-accent)}
+.li h3 .hic{width:28px;height:28px;color:var(--shariah);vertical-align:-4px;margin-right:12px}
+.li:nth-child(even) h3 .hic{color:var(--law)}
+
+.question,.thanks,.bigthanks,.take{background:linear-gradient(135deg,var(--hero),var(--hero2));color:var(--on-hero)}
+.question p,.thanks h3,.bigthanks h2{color:var(--on-hero)}
+.question .iconbox{background:rgba(255,255,255,.08);color:var(--gold)}
+.thanks p,.bigthanks .sub,.bigthanks .endans,.bigthanks .who{color:var(--on-hero-muted)}
+.bigthanks .who b{color:var(--on-hero)}
+.bigthanks .endans{border-top-color:rgba(255,255,255,.14)}
+.bigthanks::before{background:linear-gradient(var(--law),var(--shariah),var(--accent))}
+#notes{background:var(--hero);color:var(--on-hero)}
+#notes .meta{color:var(--on-hero-muted)}
+#notes .meta b{color:var(--on-hero)}
+#overview{background:var(--bg)}
+.ocard{background:var(--paper);color:var(--ink)}
+#s12 .endcases li{padding:7px 0}
+#s8b .lp{gap:10px;padding:18px 26px}
+#s8b .lp ol{gap:12px}
+#s8b .issues.vert{gap:14px}
+#s8b .issues.vert h3{font-size:30px}
+</style>
+</head>
+<body>
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/><rect x="6" y="6" width="12" height="12" transform="rotate(45 12 12)"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 15l6-6"/><circle cx="9.3" cy="9.3" r="1.1"/><circle cx="14.7" cy="14.7" r="1.1"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20.5h18"/></symbol>
+  <symbol id="i-fog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.7"/><circle cx="12" cy="17" r=".7"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.1"/><circle cx="15" cy="15" r="1.1"/><circle cx="15" cy="9" r="1.1"/><circle cx="9" cy="15" r="1.1"/><circle cx="12" cy="12" r="1.1"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2v.1h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 24 24"><path d="M13 3.5l7.5 7.5M10.5 6l7.5 7.5"/><path d="M12 4.8l-3.5 3.5M19.2 12l-3.5 3.5"/><path d="M11 13L4 20"/><path d="M3 21.5h9"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M8 20.5h8M5 7h14"/><path d="M5 7l-3 6M5 7l3 6M19 7l-3 6M19 7l3 6"/><path d="M2 13a3 3 0 0 0 6 0zM16 13a3 3 0 0 0 6 0z"/></symbol>
+  <symbol id="i-door" viewBox="0 0 24 24"><path d="M6 21V4h9v17"/><path d="M15 5.5l4 1.5v14"/><circle cx="12.5" cy="13" r=".8"/><path d="M3 21h18"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.4 5 2.8 5 5.8"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-gate" viewBox="0 0 24 24"><path d="M4 21V5M20 21V5"/><path d="M4 9h16M4 13h16"/><path d="M2 21h20"/><path d="M4 5l-1.5-1.5M20 5l1.5-1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".7"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5c3-1.5 5.5-1.5 8 0v15c-2.5-1.5-5-1.5-8 0z"/><path d="M12 5c2.5-1.5 5-1.5 8 0v15c-3-1.5-5.5-1.5-8 0"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 1 0 0 7"/><path d="M7.5 11h6M7.5 13.5h6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V3.5"/><path d="M5 4h12l-2.5 4 2.5 4H5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V9M16 16V6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-orn" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#C9CFC6" stroke-width="1.5" stroke-dasharray="2 5"/><rect x="22" y="22" width="56" height="56" fill="none" stroke="#1F4E8C" stroke-width="3" opacity=".6"/><rect x="22" y="22" width="56" height="56" fill="none" stroke="#995010" stroke-width="3" opacity=".6" transform="rotate(45 50 50)"/><circle cx="50" cy="50" r="8" fill="#995010" opacity=".35"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M12 9l-6 6v6M12 9l6 6v6"/></symbol>
+  <symbol id="i-bridge" viewBox="0 0 24 24"><path d="M2 18h20"/><path d="M4 18v-7M20 18v-7"/><path d="M4 11c4 0 5-5 8-5s4 5 8 5"/><path d="M8 18v-4M12 18v-6M16 18v-4"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.9 1.5-1.9-.4-1.3.4-2.6 1.8-2.6H18a3 3 0 0 0 3-3c0-5.5-4-10.5-9-10.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+</svg>
+
+<div id="viewport">
+<div id="stage">
+
+  <header class="topbar">
+    <div class="brand"><svg class="ic"><use href="#i-star"/></svg>IBDR · Islamic finance &amp; arbitration</div>
+    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+    <div class="counter" id="counter">01 / 13</div>
+  </header>
+
+  <!-- ===================== 1 TITLE ===================== -->
+  <section class="slide" id="s1" data-title="Title" data-time="0:15" data-sec="0">
+    <div class="title-wrap">
+      <div>
+        <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>IBDR · Final presentation</div>
+        <h1 class="rise" style="--i:1">Shariah Compliance and Arbitral Award Enforcement</h1>
+        <p class="sub rise" style="--i:2">Islamic finance, Shariah and international arbitration</p>
+        <div class="qcard rise" style="--i:3">
+          <div class="lbl">Our question</div>
+          <p>Can arbitration make Shariah-compliant contracts both enforceable and predictable?</p>
+        </div>
+        <div class="titlemeta rise" style="--i:4">
+          <span class="grp"><b>Group 2</b> · Prof. Anurag K. Agarwal · IIM Ahmedabad<br><span class="names">Aryan Gupta · Paridhi Galundia · Shailaja Mohapatra<br>Suyash Jit · Jigyasa Chauhan</span></span>
+        </div>
+      </div>
+      <div class="starbox" aria-label="Two overlapping squares, navy for national law and amber for Shariah, forming an eight-pointed star">
+        <svg class="pattern" width="400" height="480" viewBox="0 0 500 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <pattern id="khatam" width="64" height="64" patternUnits="userSpaceOnUse">
+              <rect x="18" y="18" width="28" height="28" fill="none" stroke="#CFD5CB" stroke-width="1.2"/>
+              <rect x="18" y="18" width="28" height="28" fill="none" stroke="#CFD5CB" stroke-width="1.2" transform="rotate(45 32 32)"/>
+            </pattern>
+            <radialGradient id="fade" cx="50%" cy="45%" r="60%">
+              <stop offset="0" stop-color="#F3F4F0" stop-opacity="0"/>
+              <stop offset="1" stop-color="#F3F4F0" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <rect width="500" height="520" fill="url(#khatam)"/>
+          <rect width="500" height="520" fill="url(#fade)"/>
+        </svg>
+        <svg width="360" height="360" viewBox="0 0 420 420" style="position:relative" aria-hidden="true">
+          <circle cx="210" cy="210" r="190" fill="none" stroke="#D6DBD3" stroke-width="1.5" stroke-dasharray="3 9" class="spin"/>
+          <rect class="sq-law" x="95" y="95" width="230" height="230" fill="rgba(31,78,140,.06)" stroke="#1F4E8C" stroke-width="10" stroke-linejoin="round"/>
+          <rect class="sq-sh" x="95" y="95" width="230" height="230" fill="rgba(153,80,16,.06)" stroke="#995010" stroke-width="10" stroke-linejoin="round"/>
+          <g class="core">
+            <circle cx="210" cy="210" r="74" fill="#FCFCFA" stroke="#152131" stroke-width="2"/>
+            <text x="210" y="203" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="28" font-weight="600" fill="#152131">One</text>
+            <text x="210" y="233" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="28" font-weight="600" fill="#152131">contract</text>
+          </g>
+        </svg>
+        <div class="legend"><span><i style="background:var(--law)"></i>National law</span><span><i style="background:var(--shariah)"></i>Shariah</span></div>
+        <div class="starcap">One contract, two sources of authority</div>
+      </div>
+    </div>
+    <nav class="agenda rise" style="--i:5" aria-label="Agenda">
+      <button class="ag" data-jump="1"><span class="agi"><svg class="ic"><use href="#i-chart"/></svg><em>1</em></span><span>Why it matters<small>Stakes and primer</small></span></button>
+      <button class="ag" data-jump="3"><span class="agi"><svg class="ic"><use href="#i-alert"/></svg><em>2</em></span><span>Two problems<small>Courts and Shariah</small></span></button>
+      <button class="ag" data-jump="5"><span class="agi"><svg class="ic"><use href="#i-bridge"/></svg><em>3</em></span><span>Arbitration<small>Promise and catch</small></span></button>
+      <button class="ag" data-jump="7"><span class="agi"><svg class="ic"><use href="#i-pin"/></svg><em>4</em></span><span>The Vienna case<small>Issues and answers</small></span></button>
+      <button class="ag" data-jump="11"><span class="agi"><svg class="ic"><use href="#i-bulb"/></svg><em>5</em></span><span>Learnings<small>For deal teams</small></span></button>
+    </nav>
+    <aside class="notes">Good morning. We're Group 2, and our topic is Shariah compliance and arbitral award enforcement. Let's start with a simple question. If a contract follows Islamic law, and one side refuses to pay, can the other side actually collect? That depends on two things: whether the contract's Shariah promise survives a dispute, and whether a court will enforce the result. So our question is: can arbitration make these contracts both enforceable and predictable? To answer it, we'll follow one deal from signing to payment.</aside>
+  </section>
+
+  <!-- ===================== 2 STAKES ===================== -->
+  <section class="slide" id="s2" data-title="Two rulebooks, one deal" data-time="0:35" data-sec="0">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>Why it matters</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-layers"/></svg></span><span>Two rulebooks, one deal</span></h2>
+    <div class="cols">
+      <div class="left rise" style="--i:2">
+        <div class="anat" id="anat">
+          <svg width="660" height="430" viewBox="0 0 660 430" aria-hidden="true">
+            <path class="flow" d="M330 92 L330 169" stroke="#995010" stroke-width="3" fill="none"/>
+            <path class="flow" d="M210 215 L240 215" stroke="#152131" stroke-width="3" fill="none"/>
+            <path class="flow" d="M420 215 L450 215" stroke="#1F4E8C" stroke-width="3" fill="none"/>
+            <path class="flow" d="M330 261 L330 338" stroke="#152131" stroke-width="3" fill="none"/>
+          </svg>
+          <button class="node n-sh" style="left:225px;top:0" data-k="board">Shariah board<small>certifies it</small></button>
+          <button class="node" style="left:0;top:169px" data-k="capital">Capital<small>Gulf banks, funds</small></button>
+          <div class="hub">The deal<small>two rulebooks</small></div>
+          <button class="node n-law sel" style="left:450px;top:169px" data-k="law">Governing law<small>English or DIFC law</small></button>
+          <button class="node" style="left:225px;top:338px" data-k="cp">Counterparty<small>Asia, Africa, Europe</small></button>
+        </div>
+        <p class="detail" id="anatDetail" aria-live="polite"><b>Governing law.</b> Financiers choose English or DIFC law for a predictable court.</p>
+</div>
+      <div class="lp rise" style="--i:3">
+        <div class="teach"><svg class="ic"><use href="#i-chart"/></svg>By the numbers</div>
+        <div class="numbers">
+          <div class="numrow"><div class="big">US$<span class="count" data-to="4.4" data-dec="1">4.4</span><small> tn</small></div><p>Islamic financial assets, 2025 (+13.4% in a year)</p></div>
+          <div class="numrow"><div class="big">US$<span class="count" data-to="1" data-dec="0">1</span><small> tn+</small></div><p>Sukuk (Islamic bonds) outstanding</p></div>
+          <div class="numrow"><div class="big">~<span class="count" data-to="70" data-dec="0">70</span><small>%</small></div><p>Share held by Islamic banks</p></div>
+          <div class="src">Source: IFSB Islamic Financial Stability Report 2026</div>
+        </div>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>Why it matters</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-layers"/></svg></span><p><b>Every deal is governed twice.</b>The contract names a national law, but investors, boards and counterparties also judge it by Shariah.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-alert"/></svg></span><p><b>Disputes live in the gap.</b>No global sovereign reconciles the two, so the forum the parties choose decides which rulebook wins.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">Here's the deal. [Click the boxes] A Gulf bank wants to finance a factory for a company in India. The bank can only invest in Shariah-compliant products, so a board of Islamic scholars approves the structure. But the bank also wants a court it trusts, so the contract is written under English law. So from day one, this deal answers to two rulebooks: English law and Shariah. And this is not rare. Islamic finance is a 4.4 trillion dollar market, and most cross-border deals look like this. The problem is simple: when the two rulebooks disagree, who decides?</aside>
+  </section>
+
+  <!-- ===================== 3 PRIMER ===================== -->
+  <section class="slide" id="s3" data-title="Same money, different form" data-time="0:50" data-sec="0">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>A two-minute primer</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-coin"/></svg></span><span>Same money, different form</span></h2>
+    <div class="proline rise" style="--i:2">
+      <div class="pro"><span class="iconbox ib-sh"><svg class="ic"><use href="#i-coin"/></svg></span><div><div class="t">Riba</div><p class="d">Interest on a debt</p></div></div>
+      <div class="pro"><span class="iconbox ib-sh"><svg class="ic"><use href="#i-fog"/></svg></span><div><div class="t">Gharar</div><p class="d">Excessive uncertainty</p></div></div>
+      <div class="pro"><span class="iconbox ib-sh"><svg class="ic"><use href="#i-dice"/></svg></span><div><div class="t">Maysir</div><p class="d">Pure speculation</p></div></div>
+    </div>
+    <div class="cols s3cols">
+      <div class="left rise" style="--i:3">
+        <div class="modebar">
+          <button class="btn small" data-mode="loan">Conventional loan</button>
+          <button class="btn small on" data-mode="mur">Murabaha</button>
+        </div>
+        <div class="diagram">
+          <svg width="690" height="185" viewBox="0 0 1000 268" role="img" aria-label="Cash-flow diagram comparing a conventional loan with a murabaha sale">
+            <defs>
+              <marker id="ah-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F4E8C"/></marker>
+              <marker id="ah-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#995010"/></marker>
+              <marker id="ah-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#152131"/></marker>
+            </defs>
+            <g id="supBox">
+              <rect x="40" y="100" width="210" height="80" rx="12" fill="#FCFCFA" stroke="#152131" stroke-width="2"/>
+              <text x="145" y="138" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="700" fill="#152131">Supplier</text>
+              <text id="supSub" x="145" y="164" text-anchor="middle" font-family="Public Sans, Arial" font-size="23" fill="#4A5566">sells asset</text>
+            </g>
+            <rect x="395" y="100" width="210" height="80" rx="12" fill="#FCFCFA" stroke="#152131" stroke-width="2"/>
+            <text x="500" y="138" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="700" fill="#152131">Bank</text>
+            <text id="bankSub" x="500" y="164" text-anchor="middle" font-family="Public Sans, Arial" font-size="23" fill="#4A5566">owns it briefly</text>
+            <rect x="750" y="100" width="210" height="80" rx="12" fill="#FCFCFA" stroke="#152131" stroke-width="2"/>
+            <text x="855" y="138" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="700" fill="#152131">Customer</text>
+            <text x="855" y="164" text-anchor="middle" font-family="Public Sans, Arial" font-size="23" fill="#4A5566">needs asset</text>
+            <g class="mode off" id="mLoan">
+              <path class="flow" d="M600 104 Q677 30 752 104" fill="none" stroke="#1F4E8C" stroke-width="3" marker-end="url(#ah-n)"/>
+              <text x="677" y="44" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="600" fill="#1F4E8C">Lends 100 today</text>
+              <path class="flow" d="M752 176 Q677 250 600 176" fill="none" stroke="#152131" stroke-width="3" marker-end="url(#ah-k)"/>
+              <text x="677" y="258" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="600" fill="#152131">Repays 110 later</text>
+            </g>
+            <g class="mode" id="mMur">
+              <path class="flow" d="M245 104 Q322 30 397 104" fill="none" stroke="#995010" stroke-width="3" marker-end="url(#ah-a)"/>
+              <text x="322" y="44" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="600" fill="#995010">Bank buys the asset for 100</text>
+              <path class="flow" d="M600 104 Q677 30 752 104" fill="none" stroke="#995010" stroke-width="3" marker-end="url(#ah-a)"/>
+              <text x="677" y="44" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="600" fill="#995010">Sells it on for 110</text>
+              <path class="flow" d="M752 176 Q677 250 600 176" fill="none" stroke="#152131" stroke-width="3" marker-end="url(#ah-k)"/>
+              <text x="677" y="258" text-anchor="middle" font-family="Public Sans, Arial" font-size="31" font-weight="600" fill="#152131">Pays 110 in instalments</text>
+            </g>
+          </svg>
+        </div>
+        <p class="mcap" id="mcap" aria-live="polite">The bank earns 10 as <b>profit on a sale</b> of an asset it owned: permitted.</p>
+</div>
+      <div class="lp rise" style="--i:4">
+        <p class="case1"><span class="tag">Case</span><b>Dubai Court of Cassation, 2025:</b> Islamic banks may not charge late-payment interest, even as “compensation”.</p>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>What it teaches</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-eye"/></svg></span><p><b>Substance beats labels.</b>Calling a late fee “compensation” didn’t save it: courts ask what a charge does.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-shield"/></svg></span><p><b>Public order overrides consent.</b>A clause both sides signed is still void, and courts strike it out unasked.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-alert"/></svg></span><p><b>Form invites challenge.</b>A murabaha behaves like a loan, so add-on charges get attacked as riba.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">First, how does the deal make money without interest? Shariah bans three things: riba, which is interest; gharar, too much uncertainty; and maysir, gambling. [Click Conventional loan] A normal bank would lend 100 and take back 110. That extra 10 is interest. [Click Murabaha] So instead, our bank buys the machinery for 100 and sells it to the Indian company for 110, paid in instalments. The 10 is profit on a sale, so it's allowed. Economically it looks like a loan, but legally it's a sale. Keep that in mind, because that thin line is where disputes start.</aside>
+  </section>
+
+  <!-- ===================== 4 PROBLEM 1 ===================== -->
+  <section class="slide" id="s4" data-title="Courts can’t apply Shariah" data-time="0:50" data-sec="1">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>Problem 1 · Conflict of laws</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-book"/></svg></span><span>Courts can’t apply Shariah</span></h2>
+    <div class="cols">
+      <div class="left">
+        <div class="card clause rise" style="--i:2">
+          <span class="q" aria-hidden="true">“</span>
+          <div class="lbl">A typical governing-law clause</div>
+          <span class="phrase-sh">Subject to the principles of the Glorious Sharia’a,</span>
+          <span class="phrase-law">this Agreement shall be governed by and construed in accordance with the laws of England.</span>
+        </div>
+        <div class="btnrow rise" style="--i:3">
+          <button class="btn cta small" data-reveal="1">Read it as a court does</button>
+          <span class="clickme">or press →</span>
+        </div>
+        <div class="tests rise" style="--i:4">
+          <div class="test"><span class="qn">Test 1</span><span class="qq">Is Shariah a country’s law?</span><span class="ans no step" data-step="1">No: it can’t govern</span></div>
+          <div class="test"><span class="qn">Test 2</span><span class="qq">Are specific rules named?</span><span class="ans no step" data-step="1">No: too vague</span></div>
+          <div class="test"><span class="qn">Result</span><span class="qq">What governs?</span><span class="ans law step" data-step="1">English law alone</span></div>
+        </div>
+</div>
+      <div class="lp rise" style="--i:3">
+        <p class="case1"><span class="tag">Case</span><b>Shamil Bank v Beximco (2004):</b> a murabaha “subject to” Shariah was read as plain English law.</p>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>What it teaches</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-bank"/></svg></span><p><b>Courts apply national law only.</b>In litigation the governing law must be a country’s; Shariah, lex mercatoria or religious codes can’t fill that role.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-fog"/></svg></span><p><b>Vague references are invisible.</b>“Subject to Shariah” gives a judge nothing specific to apply; only rules written in by name become terms.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-scale"/></svg></span><p><b>Certainty can cost intent.</b>The bank recovered its money, but the Shariah basis both sides signed up for disappeared from the deal.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">Now the company stops paying, and the bank goes to an English court. Look at the clause. [Read it] Subject to Shariah, governed by English law. [Press →] The court asks two questions. Is Shariah the law of a country? No. Does the clause name specific Shariah rules? No. So the court simply ignores Shariah and applies English law. This actually happened, in Shamil Bank in 2004. The bank gets paid, but the Shariah basis both sides signed up for disappears. So going to court protects the money, but not the deal's Shariah character.</aside>
+  </section>
+
+  <!-- ===================== 5 PROBLEM 2 ===================== -->
+  <section class="slide" id="s5" data-title="Shariah as an exit door" data-time="0:50" data-sec="1">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>Problem 2 · The non-compliance defence</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-door"/></svg></span><span>Shariah as an exit door</span></h2>
+    <div class="cols">
+      <div class="left">
+        <div class="door rise" style="--i:2">
+          <svg width="690" height="483" viewBox="0 0 600 420" role="img" aria-label="Flow: a distressed borrower claims non-compliance; the English-law obligation stands while the local-law obligation is at risk">
+            <defs><marker id="ah-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4A5566"/></marker></defs>
+            <rect x="170" y="10" width="260" height="62" rx="12" fill="#FCFCFA" stroke="#152131" stroke-width="2"/>
+            <text x="300" y="48" text-anchor="middle" font-family="Public Sans, Arial" font-size="25" font-weight="700" fill="#152131">Borrower in distress</text>
+            <g class="step" data-step="1">
+              <path class="flow" d="M300 74 L300 118" stroke="#4A5566" stroke-width="3" marker-end="url(#ah-g)"/>
+              <rect x="110" y="122" width="380" height="84" rx="12" fill="#F6E9DA" stroke="#995010" stroke-width="2" stroke-dasharray="7 5"/>
+              <text x="300" y="156" text-anchor="middle" font-family="Public Sans, Arial" font-size="22" font-weight="700" fill="#995010">Claims: “our deal isn’t Shariah-</text>
+              <text x="300" y="182" text-anchor="middle" font-family="Public Sans, Arial" font-size="22" font-weight="700" fill="#995010">compliant, so it’s void”</text>
+            </g>
+            <g class="step" data-step="2">
+              <path class="flow" d="M230 208 L150 262" stroke="#4A5566" stroke-width="3" marker-end="url(#ah-g)"/>
+              <path class="flow" d="M370 208 L450 262" stroke="#4A5566" stroke-width="3" marker-end="url(#ah-g)"/>
+              <rect x="10" y="266" width="270" height="62" rx="12" fill="#E2EAF5" stroke="#1F4E8C" stroke-width="2"/>
+              <text x="145" y="293" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#1F4E8C">Obligation under</text>
+              <text x="145" y="315" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#1F4E8C">English law</text>
+              <rect x="320" y="266" width="270" height="62" rx="12" fill="#F6E9DA" stroke="#995010" stroke-width="2"/>
+              <text x="455" y="293" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#995010">Obligation under a</text>
+              <text x="455" y="315" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#995010">Shariah-based local law</text>
+              <rect x="10" y="344" width="270" height="62" rx="31" fill="#E1F0E6"/>
+              <text x="145" y="371" text-anchor="middle" font-family="Public Sans, Arial" font-size="21" font-weight="700" fill="#2B6E46">Stands: compliance</text>
+              <text x="145" y="394" text-anchor="middle" font-family="Public Sans, Arial" font-size="21" font-weight="700" fill="#2B6E46">is irrelevant</text>
+              <rect x="320" y="344" width="270" height="62" rx="31" fill="#F8EDCF"/>
+              <text x="455" y="371" text-anchor="middle" font-family="Public Sans, Arial" font-size="21" font-weight="700" fill="#8A5A00">At risk: void if it</text>
+              <text x="455" y="394" text-anchor="middle" font-family="Public Sans, Arial" font-size="21" font-weight="700" fill="#8A5A00">breaches the riba ban</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="lp rise" style="--i:3">
+        <p class="case1"><span class="tag">Case</span><b>Dana Gas (2017):</b> the issuer called its own US$700m sukuk non-compliant; the English-law promise was upheld. <i>Course: separability, Kompetenz-Kompetenz.</i></p>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>What it teaches</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-bolt"/></svg></span><p><b>Distress turns compliance into a weapon.</b>When cash runs short, a borrower will attack even its own deal’s Shariah basis to avoid paying.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-split"/></svg></span><p><b>A deal is as strong as its weakest law.</b>Split across UAE and English law, the English-law promise held while the local-law parts stayed exposed.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-lock"/></svg></span><p><b>Close the exit in writing.</b>Waive the defence and make each side rely on its own Shariah advice; a DIFC appeal court upheld this in 2023.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">Now flip it. [Press →] The company says: our own contract isn't Shariah-compliant, so it's void, and we owe nothing. That sounds absurd, but Dana Gas tried exactly this in 2017 on a 700 million dollar Islamic bond. [Press →] The English-law parts held, because English law doesn't care about compliance. The parts under UAE law were at real risk. So Shariah can protect a deal, or it can become an exit door for a party that doesn't want to pay. Either way, courts leave us with a problem: Shariah is either ignored or used as a weapon.</aside>
+  </section>
+
+  <!-- ===================== 6 ARBITRATION ===================== -->
+  <section class="slide" id="s6" data-title="Arbitration can honour Shariah" data-time="0:50" data-sec="1">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The way out · Party autonomy</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-bridge"/></svg></span><span>Arbitration can honour Shariah</span></h2>
+    <div class="cols">
+      <div class="left ladder rise" style="--i:2">
+        <span class="lbl">How much Shariah intent survives?</span>
+        <button class="rung" data-s="0"><span class="nm">National court, vague reference<small>e.g. “subject to Shariah”</small></span><span class="lvl"><i style="width:8%"></i></span></button>
+        <button class="rung" data-s="1"><span class="nm">National court, named rules<small>specific standards written in as terms</small></span><span class="lvl"><i style="width:40%"></i></span></button>
+        <button class="rung sel" data-s="2"><span class="nm">Arbitration, Shariah as “rules of law”<small>UNCITRAL Model Law, Art. 28(1)</small></span><span class="lvl"><i style="width:80%"></i></span></button>
+        <button class="rung" data-s="3"><span class="nm">Specialist Islamic arbitration<small>e.g. AIAC i-Arbitration Rules 2026</small></span><span class="lvl"><i style="width:100%"></i></span></button>
+        <p class="ladetail" id="ladDetail" aria-live="polite"><b>Fully.</b> The tribunal decides under the rules the parties chose, not just a country’s law.</p>
+</div>
+      <div class="lp rise" style="--i:3">
+        <p class="case1"><span class="tag">Case</span><b>Sanghi Polyesters (England, 2000):</b> the court refused to disturb an ICC award where Shariah was to prevail. <i>Course: the arbitrator is a creation of the contract.</i></p>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>What it teaches</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-bridge"/></svg></span><p><b>Party autonomy is the bridge.</b>A court can’t make Shariah the governing law, but a tribunal can, because the parties chose those rules.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-check"/></svg></span><p><b>Courts defer to the choice, not the creed.</b>The award stood because the contract said Shariah prevails on conflict, not because the court endorsed Shariah.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-book"/></svg></span><p><b>Expertise is part of the bargain.</b>Parties can appoint Shariah-literate arbitrators; Malaysia’s 2026 rules even let tribunals consult a Shariah council.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">This is where arbitration comes in. A judge applies the law of the state. An arbitrator applies the rules the parties chose. That's party autonomy. [Click down the ladder] In court, Shariah is ignored or reduced to ordinary contract terms. In arbitration, the parties can choose Shariah as the rules that govern the deal, and appoint arbitrators who understand it. Arbitration also closes the exit door. Because of separability and Kompetenz-Kompetenz, if the company claims the whole contract is void, that argument goes to the tribunal, not to a friendlier court. So arbitration solves both problems: the deal keeps its Shariah character, and nobody escapes it easily.</aside>
+  </section>
+
+  <!-- ===================== 7 SIMULATOR ===================== -->
+  <section class="slide" id="s7" data-title="When the award reaches a court" data-time="0:50" data-sec="1">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The catch · Public policy</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-bank"/></svg></span><span>When the award reaches a court</span></h2>
+    <div class="htl proc rise" style="--i:2">
+      <div class="hrow four">
+        <div class="hp"><span class="d">Step 1</span><p>Award issued</p></div>
+        <div class="hp"><span class="d">Step 2</span><p>Loser refuses or challenges</p></div>
+        <div class="hp hot"><span class="d">Step 3</span><p>Court tests public policy</p></div>
+        <div class="hp"><span class="d">Step 4</span><p>Enforced in full, in part, or not at all</p></div>
+      </div>
+    </div>
+    <div class="sim2 rise" style="--i:3">
+      <div class="forums" role="group" aria-label="Choose the enforcing court">
+        <span class="lbl">The bank enforces its award in</span>
+        <button class="fbtn on" data-f="ksa"><svg class="ic"><use href="#i-pin"/></svg>Saudi Arabia</button>
+        <button class="fbtn" data-f="dif"><svg class="ic"><use href="#i-pin"/></svg>Dubai (DIFC courts)</button>
+        <button class="fbtn" data-f="mys"><svg class="ic"><use href="#i-pin"/></svg>Malaysia</button>
+        <button class="fbtn" data-f="vie"><svg class="ic"><use href="#i-pin"/></svg>Vienna</button>
+      </div>
+      <div class="card outcome">
+        <span class="lbl">How the court receives it</span>
+        <div class="results" aria-live="polite">
+          <div class="res" id="rA"><span class="pill ok">Enforced</span><div><div class="what">Price and profit · 100</div><div class="why"></div></div></div>
+          <div class="res" id="rB"><span class="pill no">Struck out</span><div><div class="what">Late-payment charge · 12</div><div class="why"></div></div></div>
+          <div class="res" id="rC"><span class="pill ok">No objection</span><div><div class="what">Islamic law as the rules</div><div class="why"></div></div></div>
+        </div>
+        <div class="total"><div class="n" id="tot">100 <small>of 112 collectable</small></div><div class="bar"><i id="totBar" style="width:89%"></i><b id="totWarn" style="left:89%;width:0%"></b></div></div>
+        <p class="caseline" id="caseLine" aria-live="polite"></p>
+      </div>
+    </div>
+    <aside class="notes">But winning an award is only half the job. If the company still doesn't pay, the bank has to go to a court where the company has assets and ask it to enforce the award. Under the New York Convention, that court can refuse if the award goes against its public policy. And public policy is different everywhere. [Click through the four countries] Say the award is 100 of price and profit, plus 12 as a late fee. In Saudi Arabia, the 12 is cut as interest. In Dubai's financial centre, it's unclear. Malaysia allows it only as real compensation. In Vienna, all 112 gets paid. Same award, different results. So the real test is enforcement. And in 2025, a court in Vienna faced exactly that test.</aside>
+  </section>
+
+  <!-- ===================== 8 CASE FACTS ===================== -->
+  <section class="slide" id="s8" data-title="The Vienna award: the facts" data-time="1:00" data-sec="2">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The case · Regional Civil Court of Vienna · 47 R 65/25v · 2 May 2025</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-pin"/></svg></span><span>The Vienna award</span></h2>
+    <div class="facts">
+      <div class="card fact rise" style="--i:2"><span class="lbl"><svg class="ic"><use href="#i-users"/></svg>The parties</span><p><b>Two merchants in Austria</b> in a commercial relationship; names anonymised.</p></div>
+      <div class="card fact rise" style="--i:3"><span class="lbl"><svg class="ic"><use href="#i-doc"/></svg>The dispute</span><p><b>Breach of contract:</b> a claim for damages.</p></div>
+      <div class="card fact rise" style="--i:4"><span class="lbl"><svg class="ic"><use href="#i-book"/></svg>The clause</span><p>A <b>named sole arbitrator</b> applies “Islamic provisions of law … ex aequo et bono”.</p></div>
+      <div class="card fact wide rise" style="--i:5"><span class="lbl"><svg class="ic"><use href="#i-gavel"/></svg>The award · 15 January 2024</span><div class="figure">≈ €1 million</div><p>Never challenged, <b>but never paid.</b></p></div>
+      <div class="card fact wide rise" style="--i:6"><span class="lbl"><svg class="ic"><use href="#i-euro"/></svg>Enforcement · part of the award</span><div class="figure">€320,000 + €975 costs</div><p>Via <b>garnishment</b> and a <b>forced auction</b> of a property share.</p></div>
+    </div>
+    <div class="htl case rise" style="--i:7">
+      <span class="lbl">Timeline</span>
+      <div class="hrow five">
+        <div class="hp"><span class="d">15 Jan 2024</span><p>Award issued</p></div>
+        <div class="hp"><span class="d">29 Nov 2024</span><p>Enforcement granted</p></div>
+        <div class="hp"><span class="d">2 May 2025</span><p>Appeal dismissed</p></div>
+        <div class="hp"><span class="d">18 Aug 2025</span><p>Press reports; outcry</p></div>
+        <div class="hp"><span class="d">13 Jan 2026</span><p>ÖVP calls for a ban</p></div>
+      </div>
+    </div>
+    <aside class="notes">Two businessmen in Austria had a commercial dispute. Their contract said a named arbitrator would decide it under Islamic law, based on what is fair. In January 2024, the arbitrator awarded about one million euros. The losing side didn't challenge the award, but didn't pay either. So the winner went to the Austrian courts to enforce 320,000 euros of it. The courts agreed, and in May 2025 the appeal court confirmed it. Then the media found the case, there was public anger, and a major Austrian party called for banning such clauses. The parties were both in Austria, but the question the court faced is the one every Shariah award faces when it reaches an enforcing court.</aside>
+  </section>
+
+  <!-- ===================== 8b STAKES ===================== -->
+  <section class="slide" id="s8b" data-title="What was at stake" data-time="0:45" data-sec="2">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The case · Why it is an international question</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-scale"/></svg></span><span>What was at stake</span></h2>
+    <div class="question rise" style="--i:2">
+      <span class="iconbox"><svg class="ic"><use href="#i-scale"/></svg></span>
+      <div><div class="lbl">The legal question</div><p>Can a secular state enforce an award decided under religious rules?</p></div>
+    </div>
+    <div class="cols" style="margin-top:22px">
+      <div class="issues vert">
+        <div class="issue rise" style="--i:3"><span class="lbl"><span class="lbl-l"><svg class="ic"><use href="#i-users"/></svg>Issue 1 · Choice</span><span>Party autonomy</span></span><h3>Can parties pick religious rules over a national law?</h3></div>
+        <div class="issue rise" style="--i:4"><span class="lbl"><span class="lbl-l"><svg class="ic"><use href="#i-scale"/></svg>Issue 2 · Review</span><span>Public policy</span></span><h3>Does public policy judge the source, or the result?</h3></div>
+        <div class="issue rise" style="--i:5"><span class="lbl"><span class="lbl-l"><svg class="ic"><use href="#i-fog"/></svg>Issue 3 · Certainty</span><span>Certainty</span></span><h3>Are debated rules too vague to enforce?</h3></div>
+
+      </div>
+      <div class="lp rise" style="--i:4">
+        <div class="teach"><svg class="ic"><use href="#i-globe"/></svg>Domestic facts, international law</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-book"/></svg></span><p><b>Austria's law is the Model Law.</b>s. 603 ZPO copies Art. 28(1): “rules of law”, as in 80+ countries.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-scale"/></svg></span><p><b>Same kind of test as the NY Convention.</b>It judged the result, as Art. V(2)(b) does.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-pin"/></svg></span><p><b>Vienna is an international seat.</b>A ban limits what foreign parties can agree.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-flag"/></svg></span><p><b>In India it would have to be international.</b>Only these may use non-national rules: s. 28(1)(b).</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">And that question is: can a secular court enforce an award decided under religious rules? It comes down to three issues. Can parties choose religious rules instead of a country's law? When a court checks the award, does it look at where the rules came from, or at the result? And if scholars disagree about Islamic law, is the award too uncertain to enforce? Austria's arbitration law follows the same UN Model Law as India and over 80 other countries, so the answer here matters well beyond Austria.</aside>
+  </section>
+
+  <!-- ===================== 9 JUDGE ===================== -->
+  <section class="slide" id="s9" data-title="You be the judge" data-time="1:10" data-sec="2">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The case · The court’s answers</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-gavel"/></svg></span><span>You be the judge</span></h2>
+    <div class="judge">
+      <div class="vote rise" style="--i:2">
+        <p class="ask">A show of hands: should the court enforce the €320,000?</p>
+        <button class="vbtn enf" id="vEnf">Enforce the award <span class="ct" id="cEnf">0</span></button>
+        <button class="vbtn ref" id="vRef">Refuse enforcement <span class="ct" id="cRef">0</span></button>
+        <div class="scales">
+          <svg width="420" height="190" viewBox="0 0 420 190" role="img" aria-label="Scales that tip toward the side with more votes">
+            <path d="M210 30 L210 170 M160 176 L260 176" stroke="#152131" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="210" cy="30" r="8" fill="#152131"/>
+            <g class="beam" id="beam" style="transform-box:view-box;transform-origin:210px 30px">
+              <path d="M70 30 L350 30" stroke="#152131" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <g class="panL" id="panL">
+              <path d="M70 30 L40 100 M70 30 L100 100" stroke="#2B6E46" stroke-width="2"/>
+              <path d="M30 100 Q70 132 110 100 Z" fill="#E1F0E6" stroke="#2B6E46" stroke-width="2.5"/>
+              <text x="70" y="150" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#2B6E46">Enforce</text>
+            </g>
+            <g class="panR" id="panR">
+              <path d="M350 30 L320 100 M350 30 L380 100" stroke="#A93434" stroke-width="2"/>
+              <path d="M310 100 Q350 132 390 100 Z" fill="#F7E3E1" stroke="#A93434" stroke-width="2.5"/>
+              <text x="350" y="150" text-anchor="middle" font-family="Public Sans, Arial" font-size="19" font-weight="700" fill="#A93434">Refuse</text>
+            </g>
+          </svg>
+        </div>
+        <div class="vrow">
+          <button class="btn cta" data-reveal="1">Reveal answer</button>
+          <button class="btn small" id="vReset">Reset</button>
+        </div>
+      </div>
+      <div class="holding step" data-step="1">
+        <div class="stamp">Enforced</div>
+        <div class="answer"><span class="tag">Issue 1<br>Yes</span><div><h3>Parties may choose non-national rules</h3><p>Islamic law counts as “rules of law” (s. 603 ZPO). <i>Beyond Austria:</i> autonomy covers the rules.</p></div></div>
+        <div class="answer"><span class="tag">Issue 2<br>Result</span><div><h3>Public policy tests the outcome</h3><p>Paying a debt offends no core value. <i>Beyond Austria:</i> the NY Convention tests the effect.</p></div></div>
+        <div class="answer"><span class="tag">Issue 3<br>No</span><div><h3>Debate is not arbitrariness</h3><p>Both sides heard, reasons given. <i>Beyond Austria:</i> content doubts are for the tribunal.</p></div></div>
+        <p class="net"><b>Net effect:</b> appeal dismissed; decision final.</p>
+      </div>
+    </div>
+    <aside class="notes">So, you be the judge. Hands up if you'd enforce. [Count] And refuse? [Count, then click Reveal] The court enforced it. First, parties can choose religious rules, because the law lets them choose "rules of law", not just a country's law. Second, the court looked at the result, not the source. The result was one businessman paying another a debt, which harms no one. Third, scholars disagreeing doesn't make an award arbitrary. Both sides were heard and reasons were given. If the arbitrator got Shariah wrong, that's not for the enforcing court to fix.</aside>
+  </section>
+
+  <!-- ===================== 10 AFTERMATH ===================== -->
+  <section class="slide" id="s10" data-title="Public policy cuts both ways" data-time="0:50" data-sec="2">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>The case · What it means</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-swap"/></svg></span><span>Public policy cuts both ways</span></h2>
+    <div class="cols">
+      <div class="left">
+        <div class="mirror rise" style="--i:2">
+          <div class="card mcard">
+            <div class="where"><span class="iconbox ib-law"><svg class="ic"><use href="#i-scale"/></svg></span><span class="lbl">Vienna 2025</span></div>
+            <h3>Religious rules may decide</h3>
+            <div class="mrow"><span>Protects</span><span>Secular, fundamental values</span></div>
+                        <div class="mrow"><span>Outcome</span><span>Enforced in full</span></div>
+            <div class="mrow lesson"><span>Lesson</span><span>A Shariah choice can travel if the result is acceptable</span></div>
+          </div>
+          <div class="pivot"><svg class="ic"><use href="#i-swap"/></svg><div class="circ">Public<br>policy</div></div>
+          <div class="card mcard j">
+            <div class="where"><span class="iconbox ib-sh"><svg class="ic"><use href="#i-coin"/></svg></span><span class="lbl">Jeddah 2025</span></div>
+            <h3>Interest may not be collected</h3>
+            <div class="mrow"><span>Protects</span><span>The Shariah ban on riba</span></div>
+                        <div class="mrow"><span>Outcome</span><span>Enforced, penalty cut</span></div>
+            <div class="mrow lesson"><span>Lesson</span><span>Draft remedies as real-loss compensation</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="lp rise" style="--i:3">
+        <p class="case1"><span class="tag">Debate</span>Scholars agree it is correct law, but split on whether it is good policy. <i>Course: public policy is dynamic.</i></p>
+        <div class="teach"><svg class="ic"><use href="#i-bulb"/></svg>Our view</div>
+        <ol>
+          <li><span class="lic"><svg class="ic"><use href="#i-gavel"/></svg></span><p><b>The enforcing court decides the remedy.</b>The contract sets the rules, but the court where the assets sit decides what is actually paid.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-clock"/></svg></span><p><b>Public policy is dynamic.</b>Austria enforced this award in 2025 and is now debating a ban: a safe seat today can change tomorrow.</p></li>
+          <li><span class="lic"><svg class="ic"><use href="#i-target"/></svg></span><p><b>Test the result, not the source.</b>If courts rejected awards for where their rules came from, no award under non-national rules could travel.</p></li>
+        </ol>
+      </div>
+    </div>
+    <aside class="notes">Notice what has happened across our story. Saudi Arabia used public policy to cut interest out of an award. Vienna used public policy and found nothing to cut. Same tool, opposite directions, but the same method: judge the result, not the religion behind it. We think that's the right method, because if courts rejected awards just for using religious rules, no such award could ever travel. But public policy also moves. Austria enforced in 2025, and a year later politicians want a ban. A safe place to enforce today may not be safe tomorrow.</aside>
+  </section>
+
+  <!-- ===================== 11 LEARNINGS ===================== -->
+  <section class="slide" id="s11" data-title="Five learnings for deal teams" data-time="1:00" data-sec="3">
+    <svg class="orn2" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+    <div class="eyebrow rise" style="--i:0"><svg class="ic"><use href="#i-star"/></svg>Business learnings</div>
+    <h2 class="rise ttl" style="--i:1"><span class="tile"><svg class="ic"><use href="#i-target"/></svg></span><span>Five learnings for deal teams</span></h2>
+    <div class="learn">
+      <div class="checklist">
+        <button class="li rise" style="--i:2"><span class="tick" aria-hidden="true">1</span><div><div class="top"><h3><svg class="ic hic"><use href="#i-pin"/></svg>Draft for where you’ll enforce</h3><span class="cite">Jeddah · Vienna 2025</span></div><p>The court holding the assets decides what you collect.</p></div></button>
+        <button class="li rise" style="--i:3"><span class="tick" aria-hidden="true">2</span><div><div class="top"><h3><svg class="ic hic"><use href="#i-pen"/></svg>Make every “soft” standard hard</h3><span class="cite">Shamil 2004</span></div><p>Religious, ethical or ESG standards bind only when named.</p></div></button>
+        <button class="li rise" style="--i:4"><span class="tick" aria-hidden="true">3</span><div><div class="top"><h3><svg class="ic hic"><use href="#i-lock"/></svg>Close the exits in advance</h3><span class="cite">Dana Gas 2017</span></div><p>Waive foreseeable defences at signing.</p></div></button>
+        <button class="li rise" style="--i:5"><span class="tick" aria-hidden="true">4</span><div><div class="top"><h3><svg class="ic hic"><use href="#i-shield"/></svg>Design remedies that survive scrutiny</h3><span class="cite">Dubai 2025</span></div><p>Real-loss compensation travels better than interest.</p></div></button>
+        <button class="li rise" style="--i:6"><span class="tick" aria-hidden="true">5</span><div><div class="top"><h3><svg class="ic hic"><use href="#i-scale"/></svg>Choose forums deliberately</h3><span class="cite">Sanghi 2000 · culture paper</span></div><p>Reliable courts, expert arbitrators, cultural fit.</p></div></button>
+      </div>
+      <div class="ready">
+        <div class="card answer2 rise" style="--i:3">
+          <span class="lbl" style="color:var(--shariah)"><svg class="ic" style="width:20px;height:20px;vertical-align:-4px;margin-right:6px"><use href="#i-search"/></svg>Back to our question</span>
+          <p class="q">Can arbitration make Shariah-compliant contracts both enforceable and predictable?</p>
+          <div class="verdict ok"><span class="vk">Enforceable</span><span class="vv">Yes</span></div>
+          <p class="a">If Shariah is chosen as the rules and the result passes public policy.</p>
+          <div class="verdict warn"><span class="vk">Predictable</span><span class="vv">Only by design</span></div>
+          <p class="a">Public policy varies by country and over time.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">So back to our deal. What should the bank and the Indian company have done? [Tick each] One: draft for where you'll enforce, which means knowing where the assets are. Two: if Shariah matters, name the specific rules, because vague references bind no one. Three: close the exit door at signing, with both sides confirming the deal is compliant and waiving that defence. Four: design remedies courts will accept, like compensation for actual loss instead of interest. Five: choose the forum and the arbitrators carefully. And our answer? Arbitration can make these contracts enforceable, if Shariah is chosen as the rules and the result passes public policy. Predictable? Only if you plan for it, because public policy changes from country to country and over time.</aside>
+  </section>
+
+  <!-- ===================== 12 THANK YOU / Q&A ===================== -->
+  <section class="slide" id="s12" data-title="Thank you · Cases and sources" data-time="Q&amp;A" data-sec="4">
+    <div class="endgrid">
+      <div class="bigthanks rise" style="--i:0">
+        <svg class="endstar" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-orn"/></svg>
+        <span class="lbl">IBDR · Final presentation</span>
+        <h2>Thank you</h2>
+        <p class="sub">Questions welcome</p>
+        <p class="endans">Arbitration can make Shariah-compliant contracts enforceable, but only if they are drafted for the court that will enforce them.</p>
+        <p class="who"><b>Group 2</b><br>Aryan Gupta, Paridhi Galundia, Shailaja Mohapatra, Suyash Jit, Jigyasa Chauhan</p>
+      </div>
+      <div class="endright">
+        <div class="card endcases rise" style="--i:1">
+          <span class="lbl">Cases cited</span>
+          <ul>
+            <li><b>Shamil Bank v Beximco</b><span>English Court of Appeal, 2004</span></li>
+            <li><b>Sanghi Polyesters</b><span>England, 2000</span></li>
+            <li><b>Soleimany v Soleimany</b><span>English Court of Appeal, 1998</span></li>
+            <li><b>Dana Gas v Dana Gas Sukuk</b><span>English High Court, 2017</span></li>
+            <li><b>Emirates NBD v AFM</b><span>DIFC Court of Appeal, 2023</span></li>
+            <li><b>GA Decision No. 9</b><span>Dubai Court of Cassation, 2025</span></li>
+            <li><b>Case No. 4630643243</b><span>Jeddah Court of Appeal, 2025</span></li>
+            <li><b>47 R 65/25v (Vienna)</b><span>Regional Civil Court, Vienna, 2025</span></li>
+          </ul>
+        </div>
+        <div class="card srcs rise" style="--i:2">
+          <span class="lbl">Sources</span>
+          <ol>
+            <li><a href="https://www.ifsb.org/press-releases/ifsb-releases-islamic-financial-stability-report-2026-highlighting-emerging-hybrid-risks-in-islamic-banking/">IFSB Stability Report 2026</a></li>
+            <li><a href="https://e-revistas.uc3m.es/index.php/CDT/article/view/10293">Lehmann &amp; Petschning (2026)</a></li>
+            <li><a href="https://chambers.com/articles/sharia-compliant-finance-can-sharia-be-the-governing-law">Chambers: Sharia as governing law</a></li>
+            <li><a href="https://eapil.org/2025/08/28/green-light-for-the-application-of-religious-rules/">EAPIL blog (2025)</a></li>
+            <li><a href="https://gulfnews.com/business/banking/dubai-court-bans-late-payment-charges-by-islamic-banks-and-takaful-firms-1.500201358">Gulf News: Dubai ruling (2025)</a></li>
+            <li><a href="https://www.freshfields.com/en/our-thinking/blogs/risk-and-compliance/saudi-arabias-arbitration-landscape-key-insights-from-the-sccas-analysis-of-96-102ne9h">Freshfields: Saudi landscape</a></li>
+            <li><a href="https://www.gulf-times.com/story/572039/Dana-Gas-seen-returning-to-table-after-London-ruli">Gulf Times: Dana Gas (2017)</a></li>
+            <li><a href="https://www.whitecase.com/insight-alert/arbitration-saudi-arabia-insights-scca-country-report">White &amp; Case: SCCA report</a></li>
+            <li><a href="https://practiceguides.chambers.com/practice-guides/international-arbitration-2026/malaysia">Chambers: Malaysia 2026</a></li>
+            <li><a href="https://spzh.eu/en/news/90225-in-austria-court-recognizes-sharia-norms-in-dispute-between-muslims">SPZH: ÖVP ban call (2026)</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <aside class="notes">So, can our bank collect? Yes, if the deal was drafted with the enforcing court in mind. Arbitration protects the Shariah promise, and careful drafting gets it paid. Thank you. We're happy to take questions.</aside>
+  </section>
+
+  <footer class="footer">
+    <button class="navbtn" id="prevBtn" aria-label="Previous">←</button>
+    <button class="navbtn" id="nextBtn" aria-label="Next">→</button>
+    <span class="hint"><kbd>←</kbd> <kbd>→</kbd> move · <kbd>N</kbd> notes · <kbd>O</kbd> overview · <kbd>T</kbd> theme</span>
+    <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+    <button class="tool" id="timerBtn" title="Start or pause the 10-minute timer; double-click to reset">⏱ 00:00 / 10:00</button>
+    <button class="tool" id="themeBtn" title="Change colour theme (T)"><svg class="ic"><use href="#i-palette"/></svg><span id="themeName">Iznik</span></button>
+    <button class="tool" id="notesBtn">Notes</button>
+    <button class="tool" id="ovBtn">Overview</button>
+    <button class="tool" id="fsBtn">Full screen</button>
+  </footer>
+</div>
+</div>
+
+<div id="notes" aria-live="polite"><div class="in"><div class="meta" id="notesMeta"></div><div class="txt" id="notesTxt"></div></div></div>
+<div id="overview" role="dialog" aria-label="All slides"><h2>All slides · click to jump</h2><div class="ogrid" id="ogrid"></div></div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage'), viewport=document.getElementById('viewport');
+  const slides=[...document.querySelectorAll('.slide')];
+  const sections=[{label:'Why it matters'},{label:'Courts vs arbitration'},{label:'The case'},{label:'Learnings'},{label:'Q&A'}];
+  const PRESENTED=13;
+  let cur=0; const stepState=slides.map(()=>0);
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- scaling ---------- */
+  const notesEl=document.getElementById('notes');
+  function fit(){
+    const nh=notesEl.classList.contains('open')?window.innerHeight*0.31:0;
+    viewport.style.bottom=nh+'px';
+    const s=Math.min(window.innerWidth/1600,(window.innerHeight-nh)/900);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+
+  /* ---------- steps ---------- */
+  function maxStep(s){let m=0;s.querySelectorAll('[data-step]').forEach(e=>{m=Math.max(m,+e.dataset.step)});return m}
+  function applySteps(i){
+    const s=slides[i], n=stepState[i];
+    s.dataset.stepnow=n;
+    s.querySelectorAll('[data-step]').forEach(e=>e.classList.toggle('shown',+e.dataset.step<=n));
+    if(hooks[s.id]) hooks[s.id](n);
+  }
+  function setStep(i,n){stepState[i]=Math.max(0,Math.min(n,maxStep(slides[i])));applySteps(i)}
+
+  /* ---------- navigation ---------- */
+  function go(i,fromBack){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    slides[cur].classList.remove('active');
+    cur=i;
+    stepState[i]=fromBack?maxStep(slides[i]):0;
+    slides[i].classList.add('active');
+    applySteps(i);
+    if(enter[slides[i].id]) enter[slides[i].id]();
+    chrome();
+    try{history.replaceState(null,'','#slide-'+(i+1))}catch(e){}
+  }
+  function next(){startTimer();const m=maxStep(slides[cur]);if(stepState[cur]<m){stepState[cur]++;applySteps(cur)}else if(cur<slides.length-1)go(cur+1)}
+  function prev(){if(stepState[cur]>0){stepState[cur]--;applySteps(cur)}else if(cur>0)go(cur-1,true)}
+
+  /* ---------- chrome ---------- */
+  const tabs=document.getElementById('tabs');
+  sections.forEach((sec,k)=>{
+    const b=document.createElement('button');b.className='tab';b.textContent=sec.label;
+    b.addEventListener('click',()=>{const t=slides.findIndex(s=>+s.dataset.sec===k);go(t)});
+    tabs.appendChild(b);
+  });
+  function chrome(){
+    const sec=+slides[cur].dataset.sec;
+    [...tabs.children].forEach((b,k)=>b.classList.toggle('on',k===sec));
+    document.getElementById('counter').textContent=cur<PRESENTED?String(cur+1).padStart(2,'0')+' / '+PRESENTED:'Backup';
+    document.getElementById('prog').style.width=(Math.min(cur,PRESENTED-1)/(PRESENTED-1)*100)+'%';
+    const s=slides[cur];
+    const meta=document.getElementById('notesMeta');
+    meta.innerHTML='<b></b><span></span><br>Target time: '+s.dataset.time;
+    meta.querySelector('b').textContent=cur<PRESENTED?'Slide '+(cur+1):'Backup';
+    meta.querySelector('span').textContent=s.dataset.title;
+    const a=s.querySelector('aside.notes');document.getElementById('notesTxt').textContent=a?a.textContent:'';
+    document.querySelectorAll('.ocard').forEach((c,k)=>c.classList.toggle('cur',k===cur));
+  }
+
+  /* ---------- overview ---------- */
+  const og=document.getElementById('ogrid'), ov=document.getElementById('overview');
+  slides.forEach((s,k)=>{
+    const b=document.createElement('button');b.className='ocard';
+    b.innerHTML='<div class="n"></div><div class="t"></div><div class="tm"></div>';
+    b.querySelector('.n').textContent=(k<PRESENTED?'Slide '+(k+1):'Backup')+' · '+sections[+s.dataset.sec].label;
+    b.querySelector('.t').textContent=s.dataset.title;
+    b.querySelector('.tm').textContent=s.dataset.time!=='—'?'Target '+s.dataset.time:'Not presented';
+    b.addEventListener('click',()=>{ov.classList.remove('open');go(k)});
+    og.appendChild(b);
+  });
+  function toggleOv(){ov.classList.toggle('open')}
+  function toggleNotes(){notesEl.classList.toggle('open');fit()}
+
+  /* ---------- timer ---------- */
+  const tb=document.getElementById('timerBtn');let t0=null,acc=0,running=false,iv=null;
+  function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0')}
+  function tick(){const s=acc+(running?(Date.now()-t0)/1000:0);tb.textContent='⏱ '+fmt(s)+' / 10:00';tb.classList.toggle('warn',s>=540&&s<600);tb.classList.toggle('over',s>=600)}
+  function startTimer(){if(running||acc>0)return;running=true;t0=Date.now();iv=setInterval(tick,500)}
+  tb.addEventListener('click',()=>{if(running){acc+=(Date.now()-t0)/1000;running=false;clearInterval(iv)}else{running=true;t0=Date.now();iv=setInterval(tick,500)}tick()});
+  tb.addEventListener('dblclick',()=>{running=false;clearInterval(iv);acc=0;tick()});
+
+  /* ---------- keys & buttons ---------- */
+  document.addEventListener('keydown',e=>{
+    const tag=(e.target.tagName||'');
+    if(e.key==='Escape'){ov.classList.remove('open');return}
+    if((e.key===' '||e.key==='Enter')&&tag==='BUTTON')return;
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+    else if(e.key==='Home'){go(0)} else if(e.key==='End'){go(PRESENTED-1)}
+    else if(e.key==='n'||e.key==='N'){toggleNotes()}
+    else if(e.key==='o'||e.key==='O'){toggleOv()}
+  });
+  document.getElementById('nextBtn').addEventListener('click',next);
+  document.getElementById('prevBtn').addEventListener('click',prev);
+  document.getElementById('notesBtn').addEventListener('click',toggleNotes);
+  document.getElementById('ovBtn').addEventListener('click',toggleOv);
+  document.getElementById('fsBtn').addEventListener('click',()=>{
+    try{if(!document.fullscreenElement){const p=document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}else{document.exitFullscreen()}}catch(e){}
+  });
+  document.querySelectorAll('[data-reveal]').forEach(b=>b.addEventListener('click',()=>{
+    const i=slides.indexOf(b.closest('.slide'));const n=+b.dataset.reveal;
+    setStep(i,stepState[i]>=n?stepState[i]+1:n);
+  }));
+  document.querySelectorAll('[data-jump]').forEach(b=>b.addEventListener('click',()=>{startTimer();go(+b.dataset.jump)}));
+
+  /* ---------- per-slide behaviour ---------- */
+  const hooks={}, enter={};
+
+  // S2 count-up + anatomy
+  enter.s2=()=>{
+    document.querySelectorAll('#s2 .count').forEach(el=>{
+      const to=+el.dataset.to,dec=+el.dataset.dec;
+      if(reduce){el.textContent=to.toFixed(dec);return}
+      const t1=performance.now(),d=1200;
+      function f(t){const p=Math.min(1,(t-t1)/d),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(f)}
+      requestAnimationFrame(f);
+    });
+  };
+  const anat={
+    board:['Shariah board.','Scholars certify the structure (a fatwa); a court may see it differently.'],
+    capital:['Capital.','Gulf banks and global funds, many limited to Shariah-compliant deals.'],
+    law:['Governing law.','Financiers choose English or DIFC law for a predictable court.'],
+    cp:['Counterparty.','Anywhere in the world, and so are the assets a winner must seize.']
+  };
+  document.querySelectorAll('#anat .node').forEach(n=>n.addEventListener('click',()=>{
+    document.querySelectorAll('#anat .node').forEach(x=>x.classList.toggle('sel',x===n));
+    const d=anat[n.dataset.k];const el=document.getElementById('anatDetail');
+    el.innerHTML='<b></b> <span></span>';el.querySelector('b').textContent=d[0];el.querySelector('span').textContent=d[1];
+    if(!reduce){el.style.animation='none';void el.offsetWidth;el.style.animation='rise .35s both'}
+  }));
+
+  // S3 mode toggle
+  const caps={loan:'The bank earns 10 for <b>lending money over time</b>: that is riba, banned.',mur:'The bank earns 10 as <b>profit on a sale</b> of an asset it owned: permitted.'};
+  document.querySelectorAll('#s3 [data-mode]').forEach(b=>b.addEventListener('click',()=>{
+    const m=b.dataset.mode;
+    document.querySelectorAll('#s3 [data-mode]').forEach(x=>x.classList.toggle('on',x===b));
+    document.getElementById('mLoan').classList.toggle('off',m!=='loan');
+    document.getElementById('mMur').classList.toggle('off',m!=='mur');
+    document.getElementById('supBox').style.opacity=m==='loan'?.3:1;
+    document.getElementById('supSub').textContent=m==='loan'?'not involved':'sells asset';
+    document.getElementById('bankSub').textContent=m==='loan'?'lends money':'owns it briefly';
+    document.getElementById('mcap').innerHTML=caps[m];
+  }));
+
+  // S4 clause
+  hooks.s4=n=>document.querySelector('#s4 .clause').classList.toggle('read',n>=1);
+
+  // S6 ladder
+  const LAD=[
+    '<b>Ignored.</b> The court applies the national law alone; a general reference to Shariah has no legal effect.',
+    '<b>Partly.</b> Named rules are enforced, but only as ordinary contract terms read by a generalist judge.',
+    '<b>Fully.</b> The tribunal decides under the rules the parties chose, not just a country’s law.',
+    '<b>Fully, with expertise.</b> Shariah questions can go to a Shariah Advisory Council or an expert (Malaysia, 2026).'
+  ];
+  document.querySelectorAll('#s6 .rung').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#s6 .rung').forEach(x=>x.classList.toggle('sel',x===b));
+    const el=document.getElementById('ladDetail');el.innerHTML=LAD[+b.dataset.s];
+    if(!reduce){el.style.animation='none';void el.offsetWidth;el.style.animation='rise .35s both'}
+  }));
+
+  // S7 simulator
+  const F={
+    ksa:{A:['ok','Enforced','The debt itself raises no objection.'],
+         B:['no','Struck out','Treated as riba and refused.'],
+         C:['ok','No objection','Shariah is the court’s own reference law.'],
+         tot:[89,0,'100 <small>of 112 collectable</small>'],
+         cs:'<span class="tag">Case</span><b>Jeddah Court of Appeal (2025):</b> rent enforced, delay penalty refused as riba.'},
+    dif:{A:['ok','Enforced','The debt itself raises no objection.'],
+         B:['warn','Open question','Void onshore; the DIFC reads public policy narrowly.'],
+         C:['ok','No objection','Only fundamental norms can block it.'],
+         tot:[89,11,'100–112 <small>uncertain</small>'],
+         cs:'<span class="tag">Case</span><b>Nael v Niamh Bank (DIFC, 2024):</b> only the most fundamental UAE norms count.'},
+    mys:{A:['ok','Enforced','The debt itself raises no objection.'],
+         B:['warn','Partly','Only as compensation for actual loss (ta’widh).'],
+         C:['info','Referred','Central bank’s Shariah council rules; the arbitrator is bound.'],
+         tot:[89,5,'100 <small>+ capped compensation</small>'],
+         cs:'<span class="tag">Rule</span><b>Central Bank of Malaysia Act, ss. 56–58</b> (upheld 2019): council rulings bind arbitrators.'},
+    vie:{A:['ok','Enforced','The debt itself raises no objection.'],
+         B:['ok','Enforced','Interest is an ordinary remedy under Austrian law.'],
+         C:['warn','At risk','Enforced in 2025, but a legislative ban is now being debated.'],
+         tot:[100,0,'112 <small>of 112, for now</small>'],
+         cs:'<span class="tag">Case</span><b>Regional Civil Court of Vienna (2025):</b> €1m Shariah-law award enforced.'}
+  };
+  let forum='ksa';
+  function sim(flash){
+    const row=F[forum];
+    ['A','B','C'].forEach(k=>{
+      const r=document.getElementById('r'+k);const [cls,lab,why]=row[k];
+      const pill=r.querySelector('.pill');pill.className='pill '+cls;pill.textContent=lab;
+      r.querySelector('.why').textContent=why;
+      if(flash&&!reduce){r.classList.remove('flash');void r.offsetWidth;r.classList.add('flash')}
+    });
+    document.getElementById('tot').innerHTML=row.tot[2];
+    document.getElementById('totBar').style.width=row.tot[0]+'%';
+    const w=document.getElementById('totWarn');w.style.left=row.tot[0]+'%';w.style.width=row.tot[1]+'%';
+    document.getElementById('caseLine').innerHTML=row.cs;
+  }
+  document.querySelectorAll('#s7 [data-f]').forEach(b=>b.addEventListener('click',()=>{
+    forum=b.dataset.f;document.querySelectorAll('#s7 [data-f]').forEach(x=>x.classList.toggle('on',x===b));sim(true);
+  }));
+  sim(false);
+
+  // S9 vote + scales
+  let ve=0,vr=0;
+  function vupd(){
+    document.getElementById('cEnf').textContent=ve;document.getElementById('cRef').textContent=vr;
+    const t=ve+vr, a=t?((vr-ve)/t)*12:0, rad=a*Math.PI/180, L=140;
+    document.getElementById('beam').style.transform='rotate('+a+'deg)';
+    const dyL=-L*Math.sin(rad), dxL=L-L*Math.cos(rad);
+    document.getElementById('panL').style.transform='translate('+dxL+'px,'+dyL+'px)';
+    document.getElementById('panR').style.transform='translate('+(-dxL)+'px,'+(-dyL)+'px)';
+  }
+  document.getElementById('vEnf').addEventListener('click',()=>{ve++;vupd()});
+  document.getElementById('vRef').addEventListener('click',()=>{vr++;vupd()});
+  document.getElementById('vReset').addEventListener('click',()=>{ve=0;vr=0;vupd()});
+
+  // S11 checklist
+  document.querySelectorAll('#s11 .li').forEach((li,k)=>li.addEventListener('click',()=>{
+    li.classList.toggle('done');li.querySelector('.tick').textContent=li.classList.contains('done')?'✓':String(k+1);
+  }));
+
+  /* ---------- start ---------- */
+  function fromHash(){const m=/^#slide-(\d+)$/.exec(location.hash);return m?Math.max(0,Math.min(slides.length-1,+m[1]-1)):0}
+  window.addEventListener('hashchange',()=>{const i=fromHash();if(i!==cur)go(i)});
+  fit();
+  slides[0].classList.add('active');
+  go(fromHash());
+})();
+</script>
+<script>
+(function(){
+  const names={iznik:'Iznik',saffron:'Saffron',plum:'Plum & Gold',midnight:'Midnight'}, order=['iznik','saffron','plum','midnight'];
+  const root=document.documentElement, lab=document.getElementById('themeName');
+  function dark(){try{return root.dataset.theme==='dark'||(root.dataset.theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)}catch(e){return false}}
+  function eff(){return root.dataset.palette||'iznik'}
+  function show(){lab.textContent=names[eff()]}
+  let saved=null;try{saved=localStorage.getItem('deck-palette')}catch(e){}
+  if(saved&&names[saved])root.dataset.palette=saved;
+  show();
+  function cycle(){const n=order[(order.indexOf(eff())+1)%order.length];root.dataset.palette=n;try{localStorage.setItem('deck-palette',n)}catch(e){}show()}
+  document.getElementById('themeBtn').addEventListener('click',cycle);
+  document.addEventListener('keydown',e=>{if((e.key==='t'||e.key==='T')&&!e.metaKey&&!e.ctrlKey&&!e.altKey)cycle()});
+  try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',show)}catch(e){}
+})();
+</script>
+</body>
+</html>
+
+</body></html>
